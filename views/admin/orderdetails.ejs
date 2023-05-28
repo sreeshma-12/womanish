@@ -1,0 +1,207 @@
+<%- include('./layout/header.ejs', { active: 'order-details' })%>
+
+<style>
+    td,
+    label,
+    input {
+        color: black !important;
+    }
+</style>
+<div class="page-content">
+    <div class="bg-dash-dark-2 py-4">
+        <div class="container-fluid d-flex justify-content-between">
+            <h2 class="h5 mb-0">Order detials</h2>
+        </div>
+    </div>
+    <div class="widget-content container mt-3">
+        <div class="row">
+            <div class="card-heading text-center">
+                <h2 class="card-title mb-3"><span>Order Details</span></h2>
+            </div>
+            <div id="message"></div>
+            <div class="card p-0 my-2 text-black">
+                <div class="card-header">Bill Details</div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-12 col-lg-6">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>Payment Status</td>
+                                        <td id="status"><%= singleorder.payment.payment_status %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment method</td>
+                                        <td><%= singleorder.payment.payment_method %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment id</td>
+                                        <td><%= singleorder.payment.payment_id %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Order id</td>
+                                        <td><%= singleorder._id %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coupon</td>
+                                        <td>
+                                            <% if(singleorder.coupon.name){ %> <%= singleorder.coupon.name %> <small>(<%= singleorder.coupon.code %> )</small>
+                                            <% }else{ %> No_coupon <% } %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>Sub-total</td>
+                                        <td><i class="bi bi-currency-rupee"></i><%= singleorder.bill_amount %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Items</td>
+                                        <td><%= singleorder.products.length %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount</td>
+                                        <td>%<%= singleorder.coupon.discount %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount amount</td>
+                                        <td>
+                                            <i class="bi bi-currency-rupee"></i>
+                                            <%= (Math.round((singleorder.bill_amount*singleorder.coupon.discount)/100)) %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>
+                                            <b class="text-danger fw-bold"><i class="bi bi-currency-rupee"></i> <%= (Math.round(singleorder.bill_amount-(singleorder.bill_amount*singleorder.coupon.discount)/100)) %> </b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-md-12">
+                <div class="card card-default" style="border-color: white !important; color: black !important">
+                    <div class="card border-0 ad-box-shadow p-0">
+                        <div class="card-header">
+                            <div class="card p-3 bg-light border-primary col-12">
+                                <p>Name:&nbsp;<span class="fw-bold"> <%= singleorder.address.name %> </span></p>
+                                <p>House : &nbsp;<span class="fw-bold"> <%= singleorder.address.house %> </span></p>
+                                <p>Phone :&nbsp;<span class="fw-bold"> <%= singleorder.userid.phone %> </span></p>
+                                <p>Pin :&nbsp;<span class="fw-bold"> <%= singleorder.address.pin %> </span></p>
+                                <p>City :&nbsp;<span class="fw-bold"> <%= singleorder.address.city %> </span></p>
+                                <p>District :&nbsp;<span class="fw-bold"> <%= singleorder.address.district %> </span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-light mt-2 text-black p-3">
+                    <form action="/delivarystatus" method="post">
+                        <fieldset>
+                            <legend>select delivery_status</legend>
+                            <label><input type="radio" name="Status" value="ordered" <% if(singleorder.delivery_status.ordered.state==true){ %> checked <% } %>> ordered</label><br />
+                            <label><input type="radio" name="Status" value="shipped" <% if(singleorder.delivery_status.shipped.state==true){ %> checked <% } %>> shipped</label><br />
+                            <label><input type="radio" name="Status" value="out_for_delivery" <% if(singleorder.delivery_status.out_for_delivery.state==true){ %> checked <% } %>> out_for_delivery</label><br />
+                            <label><input type="radio" name="Status" value="delivered" <% if(singleorder.delivery_status.delivered.state==true){ %> checked <% } %>> delivered</label><br />
+                            <label><input type="hidden" name="id" value="<%= singleorder._id%>" /></label><br />
+                            <% if(!singleorder.delivery_status.delivered.state==true && !singleorder.delivery_status.canceled.state==true){ %>
+                            <button type="submit">submit</button>
+                            <% }else if(singleorder.delivery_status.canceled.state==true){ %>
+                            <h5 class="text-danger text-danger">CANCELED</h5>
+                            <% }else if(singleorder.delivery_status.returned.state==true){ %>
+                            <h5 class="text-warning text-center">ORDER RETURNED</h5>
+                            <% if(singleorder.payment.payment_status!=="refund completed"){ %>
+                            <div class="card bg-light mt-2 text-black p-3" id="Refund">
+                                <h5 class="text-center mb-3">
+                                    Refund Cash= <span class="text-danger fw-bold"><i class="bi bi-currency-rupee"></i><%= (Math.round(singleorder.bill_amount-(singleorder.bill_amount*singleorder.coupon.discount)/100)) %></span>
+                                </h5>
+                                <button type="button" class="bg-dark text-light" onclick="refundcash('<%= singleorder._id%>')">Refund</button>
+                            </div>
+                            <% } %> <% }else if(singleorder.delivery_status.delivered.state==true){ %>
+                            <h5 class="text-success text-center">ORDER COMPELETED</h5>
+                            <% } %>
+                        </fieldset>
+                    </form>
+                </div>
+                <% if(singleorder.payment.payment_status=='pending' && singleorder.payment.payment_method=='cash_on_delivery' && singleorder.delivery_status.canceled.state==false ){ %>
+                <div class="card bg-light mt-2 text-black text-center p-3" id="paymentbtn">
+                    <h5>Got Payment</h5>
+                    <button class="btn btn-outline-success" onclick="paymentpending('<%= singleorder._id %>')">Yes</button>
+                </div>
+                <% } %>
+            </div>
+            <div class="col-xl-7 col-md-12">
+                <div class="admincard card card-default" style="border-color: white !important">
+                    <div class="card-body">
+                        <% singleorder.products.forEach(product=> { %>
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="card p-4 bg-light col-3 mx-1">
+                                <img style="width: 100px; height: 100px" src="/productimages/<%= product.product_id.image[0] %>" alt="" />
+                            </div>
+                            <div class="card p-3 bg-light col-9 text-black d-flex align-items-around">
+                                <p>Name: &nbsp;<small class="fw-bold"> <%= product.name %> </small></p>
+                                <p>Price : &nbsp;<i class="bi bi-currency-rupee"></i><%= product.price %></p>
+                                <p>Quantity:&nbsp;<%= product.quantity%></p>
+                                <p>
+                                    Amount:&nbsp;<span class="fw-bold"
+                                        ><i class="bi bi-currency-rupee"></i>
+                                        <%=product.quantity*product.price %>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <% });%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('./layout/footer.ejs')%>
+<script>
+    function paymentpending(id) {
+        console.log("hello");
+        $.ajax({
+            type: "PUT",
+            url: "/paymentpending",
+            data: {
+                id,
+            },
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            if (data == "completed") {
+                $("#status").html("completed");
+                $("#paymentbtn").remove();
+                resHTML = '<div class="alert alert-success alert-dismissible"> ' + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' + "<strong>Success</strong>Payment updated";
+                ("</div>");
+            }
+            $("#message").html(resHTML);
+        });
+    }
+
+    function refundcash(id) {
+        $.ajax({
+            type: "post",
+            url: "/refundcash",
+            data: {
+                id,
+            },
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            if (data == "success") {
+                resHTML = '<div class="alert alert-success alert-dismissible"> ' + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' + "<strong>Success</strong>Refund Success";
+                ("</div>");
+                $("#message").html(resHTML);
+                $("#Refund").remove();
+            }
+        });
+    }
+</script>

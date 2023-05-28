@@ -1,0 +1,197 @@
+<%- include('../admin/layout/header.ejs', { active: 'new-product' }) -%>
+
+<div class="page-content">
+  <div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid d-flex justify-content-between">
+      <h2 class="h5 mb-0">Add Products</h2>
+    </div>
+  </div>
+  <div class="widget-content widget-content-area add-manage-product-2 container mt-3">
+    <div class="row">
+      <% if (userstatus == "true") { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Products are added successfully!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% } %>
+      <% if(field=="nofield" ) { %>
+      <div id="nofield" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Add required fields
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% } %>
+      <div class="card-heading text-center">
+        <h2 class="card-title mb-3"><span>ADD PRODUCT</span></h2>
+      </div>
+      <div class="col-xl-5 col-md-12">
+        <div class="card card-default" style="border-color: white !important; color: black !important;">
+          <div class="card border-0 ad-box-shadow p-0">
+            <div class="card-header">
+              Images
+            </div>
+            <div class="card-body">
+              <div class="border mb-1" style="height: 230px;">
+                <label for="product_images" class="d-block">
+                  <div id="image_drop_area" class="d-flex justify-content-center align-items-center mx-auto col-md-10 my-1 text-muted" style=" min-height: 200px; border: 1px dashed rgba(57, 57, 57, 0.766);" onclick="document.getElementById('image_drop_area').innerHTML=`<p class=''>Drag and Drop Image here</p>`">
+                    <p class="text-muted">Drag and Drop Image here</p>
+                  </div>
+                </label>
+              </div>
+              <div id="dragged_images">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-7 col-md-12 ">
+        <div class="admincard card card-default" style="border-color:white !important;">
+          <div class="card-body">
+            <div class="card-body">
+              <form class="form-horizontal" action="/admin/new-product" method="post" enctype="multipart/form-data">
+                <input type="file" name="product_images" class="d-none" id="product_images" multiple accept="image/*">
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Name :</label>
+                    <div class="col-md-8">
+                      <input class="form-control" name="name" type="text" fdprocessedid="ql246j" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Description :</label>
+                    <div class="col-md-8">
+                      <textarea rows="4" cols="5" name="description" class="form-control" required></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Short Description :</label>
+                    <div class="col-md-8">
+                      <textarea rows="4" cols="5" name="shortdescription" class="form-control"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Price :</label>
+                    <div class="col-md-8">
+                      <input class="form-control" name="price" type="number" fdprocessedid="mvkd67" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Brand:</label>
+                    <div class="col-md-8">
+                      <select class="form-control form-custom" name="brand" fdprocessedid="snbdje">
+                        <option value="">Select a Brand</option>
+                        <% category.forEach((cate)=>{ %>
+                         <option value="<%=cate._id %>"><%= cate.categoryName %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Stock :</label>
+                    <div class="col-md-8">
+                      <input class="form-control" name="stock" min="0" type="number" fdprocessedid="f8vluf" required>
+                    </div>
+                  </div>
+                </div>
+                 <!-- <div class="form-group mb-4">
+                  <div class="row">
+                    <label class="col-md-4">Status :</label>
+                    <div class="col-md-8">
+                      <select class="form-control form-custom" name="status" fdprocessedid="vhuc4m">
+                        <option value="">Please Select</option>
+                        <option>In Stock</option>
+                        <option>Out of Stock</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>  -->
+                <div class="d-flex justify-content-center  mt-4 mb-lg-4">
+                  <button type="submit" class="btn btn-success px-5 p-2">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    setTimeout(() => {
+      document.getElementById("nofield").remove();
+    }, 3000);
+  </script>
+   <script> 
+    function imageDrop() {
+      const image_drop_area = document.querySelector("#image_drop_area");
+      var uploaded_image;
+      // Event listener for dragging the image over the div
+      image_drop_area.addEventListener('dragover', (event) => {
+        image_drop_area.classList.add('bg-secondary')
+        image_drop_area.classList.add('text-white')
+        image_drop_area.classList.remove('text-muted')
+        event.stopPropagation();
+        event.preventDefault();
+        // Style the drag-and-drop as a "copy file" operation.
+        event.dataTransfer.dropEffect = 'copy';
+      });
+      image_drop_area.addEventListener('dragleave', (event) => {
+        image_drop_area.classList.remove('bg-secondary')
+        image_drop_area.classList.remove('text-white')
+        image_drop_area.classList.add('text-muted')
+      });
+      // Event listener for dropping the image inside the div
+      image_drop_area.addEventListener('drop', (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        fileList = event.dataTransfer.files;
+        document.querySelector("#product_images").files = fileList;
+        document.getElementById('dragged_images').innerHTML = '';
+        for (let i = 0; i < fileList.length; i++) {
+            if(!fileList[i].type.startsWith("image/")) {
+                alert("Invalid image")
+                return
+            }
+        }
+        for (let i = 0; i < fileList.length; i++) {
+            readImage(fileList[i]);
+        }
+        image_drop_area.classList.remove('bg-secondary')
+        image_drop_area.classList.remove('text-white')
+        image_drop_area.classList.add('text-muted')
+      });
+       // Converts the image into a data URI
+      readImage = (file) => {
+        let dragged_images = document.getElementById('dragged_images');
+        dragged_images.innerHTML = '';
+        const reader = new FileReader();
+        reader.addEventListener('load', (event) => {
+          uploaded_image = event.target.result;
+          image_drop_area.style.border = 'none';
+          dragged_images.innerHTML += `<div class="d-flex border justify-content-between rounded align-items-center my-1">
+      <div style="max-height: 80px; max-width: 80px;" class="p-0 rounded">
+          <img src="${uploaded_image}" alt=""  class="image-fluid rounded w-100">
+          </div>
+          <p class="text-secondary">${file.name}</p>
+          </div>`
+        });
+        reader.readAsDataURL(file);
+      }
+    }
+   imageDrop()
+   </script>
+</div>
+<%- include('../admin/layout/footer.ejs') -%>
+   
+
+            
+            
+            

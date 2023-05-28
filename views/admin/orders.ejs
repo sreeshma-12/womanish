@@ -1,0 +1,75 @@
+<%-include('../admin/layout/header.ejs', { active: 'orders' }) -%>
+<div class="page-content">
+  <div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+      <h2 class="h5 mb-0">Orders</h2>
+    </div>
+  </div>
+  <div class="container p-5 ">
+    <table id="myTable" class="table table-striped table-bordered table-responsive table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">OrderID</th>
+         <!-- <th scope="col">User</th>  -->
+          <th scope="col">Items</th>
+          <th scope="col">Ordered</th>
+          <th scope="col">od status</th>
+          <th scope="col">payment status</th>
+          <!-- <th scope="col">Actions</th> -->
+        </tr>
+       </thead>
+       <tbody>
+           <% const quantity=0; orders.forEach((order,i)=> { %> 
+          <tr>
+          <td>
+             <%= i+1 %> 
+          </td>
+          <td>
+           <%= order._id %> 
+          </td>
+          <!-- <td>
+             <%= order.userid.userName %> 
+          </td> -->
+          <td>
+           <%= order.products.length %> 
+          </td>
+          <td>
+           <%= order.ordered_date.getDate() %>/<%= order.ordered_date.getMonth()+1 %>/<%= order.ordered_date.getFullYear() %> 
+          </td>
+          <td class="text-light">
+             <% if(order.delivery_status.returned.state){ %> 
+             <p><b class="text-warning">RETURNED</b><small>(<%= order.delivery_status.returned.date.getDate() %>/<%= order.delivery_status.returned.date.getMonth()+1 %>/<%= order.delivery_status.returned.date.getFullYear() %>)</small> </p>
+             <% }else if(order.delivery_status.delivered.state){ %> 
+             <p><b class="text-success">DELIVERED</b><small>(<%= order.delivery_status.delivered.date.getDate() %>/<%= order.delivery_status.delivered.date.getMonth()+1 %>/<%= order.delivery_status.delivered.date.getFullYear() %>)</small> </p> 
+             <% }else if(order.delivery_status.canceled.state){  %> 
+             <p> <b class="text-danger">CANCELED</b><small>(<%= order.delivery_status.canceled.date.getDate() %>/<%= order.delivery_status.canceled.date.getMonth()+1 %>/<%= order.delivery_status.canceled.date.getFullYear() %>)</small> </p> 
+             <% }else if(order.delivery_status.out_for_delivery.state){ %> 
+             <p> <b>OUT_FOR_DELIVERY</b><small>(<%= order.delivery_status.out_for_delivery.date.getDate() %>/<%= order.delivery_status.out_for_delivery.date.getMonth()+1 %>/<%= order.delivery_status.out_for_delivery.date.getFullYear() %>)</small> </p> 
+             <% }else if(order.delivery_status.shipped.state){  %> 
+             <p> <b class="text-info">SHIPPED</b><small>(<%= order.delivery_status.shipped.date.getDate() %>/<%= order.delivery_status.shipped.date.getMonth()+1 %>/<%= order.delivery_status.shipped.date.getFullYear() %>)</small> </p> 
+             <% }else if(order.delivery_status.ordered.state){  %> 
+             <p> <b>ORDERED</b><small>(<%= order.delivery_status.ordered.date.getDate() %>/<%= order.delivery_status.ordered.date.getMonth()+1 %>/<%= order.delivery_status.ordered.date.getFullYear() %>)</small> </p> 
+             <% } %> 
+          </td>
+           <td>
+             <% if(order.payment.payment_status=='pending'){ %> 
+             <%= order.payment.payment_method %>-<span class="badge border border-warning  text-warning px-2 py-1 rounded-3 fw-bold"><%= order.payment.payment_status %></span> 
+             <% }else{ %> 
+             <%= order.payment.payment_method %>-<span class="badge border border-success  text-success px-2 py-1 rounded-3 fw-bold"><%= order.payment.payment_status %></span> 
+             <% } %> 
+          </td> 
+          <td>
+        <a class="mx-3" href="/admin/orderdetails/<%= order._id %>"><i class="bi bi-eye-fill text-light"></i></a> 
+       <a href="/admin/orderinvoice/<%= order._id %>"><i class="bi bi-receipt text-light"></i></a>
+          </td> 
+          <td>
+            
+          </td>
+   </tr>
+   <% }); %> 
+ </tbody>
+</table>
+</div>
+<%-include('../admin/layout/footer.ejs') -%>
+

@@ -1,0 +1,715 @@
+<%-include('../users/layouts/header.ejs') -%>
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>Footwear - Free Bootstrap 4 Template by Colorlib</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Ion Icon Fonts-->
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<style>
+.checkout-container {
+  margin: 50px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.cart-detail {
+  margin-bottom: 20px;
+}
+
+.cart-detail h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.radio label,
+.checkbox label {
+  font-weight: normal;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+.apply-coupon {
+  display: flex;
+  align-items: center;
+}
+
+.apply-coupon input {
+  height: 40px;
+  width: 200px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.apply-coupon button {
+  height: 40px;
+  margin-left: 10px;
+  padding: 0 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.apply-coupon button:hover {
+  background-color: #0069d9;
+}
+.btn:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+</style>	
+
+<script>
+
+    function selectAddressData() {
+        const address = JSON.parse(document.querySelector("#address1").value);
+        [ "city", "district", "state", "post", "pin", "phone" ].forEach(k => {
+            document.querySelector(`#address-${k}`).value = address[k]
+        })
+    }
+</script>
+
+<div class="checkout-container">
+	<div class="row">	  
+
+<div class="colorlib-loader"></div>
+   <div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+			
+
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<i class="bi bi-hand-index"></i>
+						<p class="bread">Please fill up the details below to checkout : <span><a href="account" ></address> Add address</a></span> </address> <span></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+         <!----------------------------------------  -->
+		 <!-- <% userdetials.useraddress.forEach((data) => {%> 
+           <div class="card">
+			<p><%= data.name %>,<%= data.house%>,<%= data.post%> ,<%= data.city%>,<%= data.district%>,<%= data.state%> ,<%= data.pin%></p>
+			
+		   </div>
+
+           <% }) %>  -->
+  <!--------------------------------------- -->
+		<!-- <div class="colorlib-product">
+            <div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-sm-10 offset-md-1">
+						<div class="process-wrap">
+							<div class="process text-center active">
+								<p><span>01</span></p>
+								<h3>Shopping Cart</h3>
+							</div>
+							<div class="process text-center active">
+								<p><span>02</span></p>
+								<h3>Checkout</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>03</span></p>
+								<h3>Order Complete</h3>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				
+			       	<div class="row">
+					<div class="col-lg-8">
+						 <form method="post" action="/checkoutform" class="colorlib-form" class="colorlib-form">
+						<div class="colorlib-form" class="colorlib-form">
+							<h2>Billing Details</h2>
+		              	<div class="row"> 
+			               <div class="col-md-12">
+			                  <div class="form-group">
+			                  	<!-- <label for="country">Select Country</label>
+			                     <div class="form-field">
+			                     	<i class="icon icon-arrow-down3"></i>
+			                        <select name="people" id="people" class="form-control">
+										<ul class="dropdown">
+									    <option value="#">Select country</option>
+				                        <option value="#">India</option>
+				                        <option value="#">China</option>
+				                        <option value="#">Japan</option>
+				                        <option value="#">Korea</option>
+				                        <option value="#">Philippines</option>
+			                        </select>
+			                     </div> -->
+			                  </div>
+			               </div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="fname">First Name</label>
+										<input type="text" id="fname"name="fname" class="form-control" placeholder="Your firstname">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="lname">Last Name</label>
+										<input type="text" id="lname" name="lname" class="form-control" placeholder="Your lastname">
+									</div>
+								</div>
+
+							<div class="col-md-12">
+									<div class="form-group">
+										<label for="address">Address</label>
+
+                                        <select name="address1" id="address1" class="form-control" onchange="selectAddressData()">
+                                            <%
+                                                if((userdetials.useraddress?.length||0)==0) {
+                                                    %>
+                                                        <input type="text" id="address2" name="address1" class="form-control" placeholder="Enter Your Address">
+                                                    <%
+                                                } else {
+                                                    %>
+                                                        <option value="<%= JSON.stringify({name : '', city : '', district : '', state : '', post : '', pin : '', phone : '', }) %>">-- select address --</option>
+                                                    <%
+                                                    userdetials.useraddress.forEach((val,i) => {
+                                                        %>
+                                                            <option value="<%= JSON.stringify(val) %>"><%= val.name %></option>
+                                                        <%
+                                                    })
+                                                }
+                                            %>
+                                        </select>
+			                  </div>
+			                  <!-- <div class="form-group">
+			                    	<input type="text" id="address2" name="address2"  class="form-control" placeholder="Second Address">
+			                  </div> -->
+			               </div>
+			            
+			               <div class="col-md-12">
+									<div class="form-group">
+										<label for="city">City</label>
+			                    	<input type="text" id="address-city" name="city" class="form-control" placeholder="Town or City">
+			                  </div>
+			               </div>
+			            
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="district">District</label>
+										<input type="text" id="address-district" name="district" class="form-control" placeholder="District">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="state">State</label>
+										<input type="text" id="address-state"  name="state"  class="form-control" placeholder="State">
+									</div>
+								</div>
+							
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="email">post</label>
+										<input type="text" id="address-post" name="post" class="form-control" placeholder="Post">
+									</div>
+								</div>
+                               <div class="col-md-6">
+									<div class="form-group">
+										<label for="pin">pin</label>
+										<input type="text" id="address-pin" name="pin" class="form-control" placeholder="Pin">
+									</div>
+								</div>
+                              <div class="col-md-6">
+									<div class="form-group">
+										<label for="Phone">Phone Number</label>
+										<input type="number" id="address-phone" name="pnumber" class="form-control" placeholder="Mobile">
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<div class="radio">
+										  <label><input type="radio" name="optradio"> Create an Account? </label>
+										  <label><input type="radio" name="optradio"> Ship to different address</label>
+										</div>
+									</div>
+								</div>
+		                   </div>
+			       </div>
+			
+			    <container>
+			   <!-- <div class="w-100" style="padding-left: 5px;"></div> -->
+			              <div class="col-lg-20">
+								<div class="cart-detail" style="padding-left: 10px;">
+									<h2>Payment Method</h2>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="radio">
+											   <label><input type="radio" value="cod" name="optradio">COD</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="radio">
+											   <label><input type="radio" value="razorpay" id="rzp-button1" name="optradio">Razor Pay</label>
+											</div>
+										</div>
+									</div>
+							
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="checkbox">
+											   <label><input type="checkbox" value="">I have read and accept the terms and conditions</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>  
+
+
+						<div class="col-lg-4">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="cart-detail">
+							<h2>Cart Total</h2>
+							<ul>
+				 <% let subtotal = 0 %> 
+				  <% orderData.products.forEach((data) => {%> 
+				 <% subtotal += data.price * data.quantity %> 
+			<li>
+			 <span><%= data.name %></span><span><%= data.quantity %> x <%= data.price%></span> 
+						</li>
+					 <% }) %> 
+					 <li>
+							<span>Discount</span>  <span id="discountAmount"> <%= orderData.coupon.discount %> </span>
+						
+					 </li>
+					  <% let discountAmount = subtotal * (orderData.coupon.discount / 100); %>
+						<li>	
+							 <span>Subtotal</span> <span><%= subtotal %></span>  
+								</li> 
+						<li>
+					<input type="text" class="d-none" value="<%= subtotal %>" id="subtotal">
+					 <!-- <span>Discount</span> <span>< %= discountAmount %></span> -->
+					</li>
+					        <li>
+							 <span>Order Total</span> <span id="ordertotal"><%= Math.round(subtotal-(subtotal*orderData.coupon.discount)/100 ) %></span> 
+								</li> 
+								<li>
+                                        <!-- <div class="apply-coupon">
+										<input type="text" placeholder="Enter coupon code">
+										<button>Apply</button>
+									  </div> -->
+	<!--  just have hided -->
+    <!-- coupon modal copied -->
+    <!-- <p
+	class="text-success"
+	id="applyCoupon"
+	data-toggle="modal"
+	data-target="#exampleModal"
+	 class="ps-2 btn btn-success btn-hover" >
+	Apply Coupon
+	</p>
+
+    
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+ >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title text-center text-white" id="exampleModalLabel">
+          Apply Coupon
+        </h5>
+        <button
+          type="button" 
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >X</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="d-inline" id="priceDiv" style="visibility: hidden">
+            <h2
+              id="offerPrice"
+              class="d-inline text-primary text-center ms-3"
+            ></h2>
+            <span class="d-inline" id="offerLabel"></span>
+          </div>
+          <h3>Get Upto 60% discount on products</h3>
+          <div class="row mt-3">
+            <form id="couponForm" >
+              <input
+                type="text"
+                id="couponCode"
+                style="
+                  float: left;
+                  width: 214px;
+                  height: 36px;
+                  text-transform: uppercase;
+                "
+                placeholder="Enter Coupon Code"
+              />
+              <button
+                id="couponButton"
+                type="submit"
+                style="width: 100px; height: 36px"
+                class="btn btn-success"cou
+              >
+                Check
+              </button>
+              <p id="couponStatus" class="" style="display: none"></p>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+		<% let coupons=coupon %>
+          <% for(let coup of coupons){ %>
+          <div class="mt-3">
+            Code:
+            <strong class="border p-1"> <%=coup.couponCode%></strong>
+            <br />
+           Min Purchase Amount: ₹<%=coup.minimumAmount %> <br /> 
+            Expires On: : <%=coup.expiryDate.toLocaleString() %>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center align-items-center">
+        <div class="row">
+          <div id="maxDiscount" class="col-5 align-self-center"></div>
+          <div class="col-4 ms-2 p-2">
+            <button
+              id="applyButton"
+            
+	         class="ps-2 btn btn-success btn-hover"
+              onclick="applyCoupon()"
+               disabled
+               >
+                Apply
+                </button>
+                   </div>
+                     </div>
+                      </div>
+                      </div>
+                        </div>
+                           </div>
+                        
+                        -->
+                          <!--coupon modal ended -->
+<!-- ----------------------------------------       test         ---------------- -->
+
+
+ <p class="text-success" id="applyCoupon" data-toggle="modal" data-target="#exampleModal" class="ps-2 btn btn-success btn-hover">Apply Coupon</p>
+<p class="text-success"  id="CouponApplied"> </p>
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h5 class="modal-title text-center text-white" id="exampleModalLabel">
+          Apply Coupon
+        </h5>
+        <button type="button" id="closeCoupon"  class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+           
+          <div class="col-md-12">
+            <h2 class="text-primary text-center mb-3">Get up to 60% off</h2>
+          </div>
+          <div class="col-md-12">
+            <form id="couponForm">
+              <div class="input-group">
+                <input type="text" id="couponCode" class="form-control" placeholder="Enter Coupon Code" aria-label="Coupon Code" aria-describedby="couponButton">
+                <button class="btn btn-success" id="couponButton" type="submit">
+                  <i class="fas fa-check"></i> Check
+                </button>
+              </div>
+              <p id="couponStatus" class="mt-2"></p>
+            </form>
+          </div>
+           </div>
+		   <div class="coupon-container" style="max-width:500px; overflow-y:scroll;" >
+		<% for(let coup of coupons){ %>
+          <div class="mt-3">
+            Code:
+            <strong class="border p-1"> <%=coup.couponCode%></strong>
+            <br />
+           Min Purchase Amount: ₹<%=coup.minimumAmount %> <br /> 
+            Expires On: : <%=coup.expiryDate.toLocaleString() %>
+          </div>
+          <% } %>
+        </div>
+		<div class="modal-footer justify-content-center align-items-center">
+        <div class="row">
+          <div id="maxDiscount" class="col-5 align-self-center"></div>
+          <div class="col-4 ms-2 p-2">
+             <button
+              id="applyButton"
+            
+	         class="ps-2 btn btn-success btn-hover"
+              onclick="applyCoupon()"
+               disabled 
+               >
+                 Apply 
+                </button> 
+                   </div>
+                     </div>
+                      </div>
+                    </div>
+                 </div>
+             </div>
+            </div> 
+ 
+ 
+
+                             </li>
+                              </ul>
+						    </div> 
+					     </div> 
+				      </div>
+                      
+<!-- add address modal -->
+<div class="modal fade border-5" id="addressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ADD ADDRESS</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#addressModal').modal('hide');">X</button>
+            </div>
+            <div class="modal-body">
+                <form id="actionmodel" action="/addaddress" method="post">
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">Address Name (eg: House-2, Work)</label>
+                        <input type="text" class="form-control" name="name" id="name" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">City</label>
+                        <input type="text" id="city" class="form-control" name="city" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">District</label>
+                        <input type="text" id="district" class="form-control" name="district" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">State</label>
+                        <input type="text" class="form-control" id="state" name="state" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Post</label>
+                        <input type="text" id="post" class="form-control" name="post" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Pin</label>
+                        <input type="number" id="pin" class="form-control" name="pin" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Phone</label>
+                        <input type="number" id="phone" class="form-control" name="phone" required />
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <input type="hidden" value="/cart" name="whereto">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- addresses -->
+
+<div class="border p-2 mt-2" id="">
+    <div id="addressList">
+        <h5 class="text-secondary border-bottom py-2 mb-2">Saved Addresses</h5>
+        <% if((userdetials.useraddress?.length||0)==0) { %>
+        <h3 class="text-dark text-center">No Address Avaliable</h3>
+        <p class="text-muted text-center">Add new address</p>
+        <% } else { %> <% userdetials.useraddress.forEach((val,i)=>{ %>
+        <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#accountCreationModal">
+            <div class="card p-3 bg-light my-2" id="<%= val.id %>item">
+                <div class="d-flex justify-content-between">
+                    <h6>Address <%= i+1 %></h6>
+                    <a class="text-danger text-lg-end text-decoration-none" onclick="deleteaddress('<%= val._id %>')" href="#">
+                        <large><i class="bi bi-trash"></i></large>
+                    </a>
+                </div>
+                <div class="col-md-12">
+                    <p id="p"><b> <%= val.name%></b>, <%= val.post +', ' +val.pin+', '+ val.city +', ' +val.district+', '+val.state  +', '+  val.phone %></p>
+
+                </div>
+                <a class="text-danger text-right" href="/delete-address?name=<%= val.name%>&whereto=/cart">Delete</a>
+                <!-- <a class="text-success text-lg-end text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editaddress('<%=val._id %>')" href="#"
+                    ><small><i class="bi bi-pencil-square"></i> Edit</small>
+                </a> -->
+            </div>
+        </a>
+        <% }) %> <% } %>
+    </div>
+    <div class="bg-dash-dark-2 py-4">
+        <div class="container-fluid d-flex justify-content-center">
+            <a href="#">
+                <button type="button" class="btn btn-dark" onclick="$('#addressModal').modal('show');" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Address</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+			        </div> 
+						
+			           
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button type="submit" class="btn btn-primary" id="orderbutton">Place an order</button>
+							</div>
+						</div>
+						<input class="hi" id="id" type="hidden" value="<%= orderData._id %>" name="id">
+						</form>
+		            </div>
+		             </div>
+				</div>
+			</div>
+		</div>
+        
+     <!-- <h4>News</h4>
+    </div> -->
+    <p> 
+        
+   <!-- <span>! Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. 
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </span>  
+							  <span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span> -->
+					  </p> 
+					 </div> 
+				 </div> 
+			 </div> 
+	    </div>
+        
+  <!-- <div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div> -->
+ </div>
+</div>
+
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+			document.getElementById('rzp-button1').onclick = async function(e){
+		  const subtotal =  document.getElementById('subtotal').value	
+            alert(subtotal)
+		  e.preventDefault();
+			let response = await fetch("http://localhost:3000/payment",{
+				method: "POST",
+				headers:{
+					"Content-Type":"application/json"
+				},
+				body : JSON.stringify({
+                   amount:subtotal,
+				})
+             });
+			 
+			let orderData = await response.json();
+			console.log(orderData);
+			var options = {
+    "key": "rzp_test_MSPCtYdp5Zx6lY", // Enter the Key ID generated from the Dashboard
+    "amount": orderData.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+            //  "name": "Acme Corp", //your business name
+            // "description": "Test Transaction",
+            //    "image": "https://example.com/your_logo",
+     "order_id": orderData.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+             //     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+            //                
+             "handler": function (response){
+             alert(response.razorpay_payment_id);
+             alert(response.razorpay_order_id);
+             alert(response.razorpay_signature)},
+	        //   "prefill": {
+            //   "name": "Gaurav Kumar", //your customer's name
+            //   "email": "gaurav.kumar@example.com",
+            //            "contact": "9000090000"
+            //             },
+            //         "notes": {
+            //         "address": "Razorpay Corporate Office"
+            //        },
+            //   "theme": {
+             //       "color": "#3399cc"
+            //   }
+              };
+              var rzp1 = new Razorpay(options);
+                rzp1.open();
+                }			
+             </script>
+			 <script>
+              $.ajax(settings).done(function(response){
+                alert(JSON.stringify(response)) 
+                  //   orderId= response.orderId
+                  //   console.log(orderId);
+                  //    $("button").show()
+                     });
+
+</script>
+<script>
+const applyButton = document.getElementById("applyButton");
+applyButton.addEventListener("click", () => {
+applyButton.classList.add("btn-hover");
+});
+</script>
+<!-- <%-include('../users/layouts/footer.ejs') -%> -->
+
+<script src="/javascript/couponValidate.js" defer type="text/javascript">
+	
+</script>
+<script src="/javascript/order.js" defer type="text/javascript">
+</script>

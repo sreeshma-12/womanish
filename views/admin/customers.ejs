@@ -1,0 +1,89 @@
+<%- include('../admin/layout/header.ejs', { active: 'users' }) -%>
+<style>
+  td,
+  input{
+    color: white !important;
+  }
+</style>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> 
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<h1>Customers list</h1>
+<br>
+<!-- <form>
+<input type="text" placeholder="Search User name,email,address,contact" name="search">
+<input type="submit" value="Search">
+</form>  -->
+<!-- <br>
+<table width="50%">
+<tr> -->  
+<!-- <th>Name</th>
+<th>Email</th>
+<th>Address</th>
+<th>Contact</th>
+<th>Actions</th>
+</tr>
+ <%
+ if(users.length>0){
+      for(let i=0;i<users.length;i++){
+    %>
+<tr> -->
+<!-- <td><%= users[i].name %></td>
+<td><%= users[i].email %></td>
+<td><%= users[i].address%></td>
+<td><%= users[i].contact %></td>
+<td><a href="/admin/edit-user?id=<%= users[i]._id%>">Edit</a></td>
+<td><a href="/admin/delete-user?id=<%= users[i]._id%>"> Delete</a></td>
+<td><a href="/admin/edit-user?id=<%= users[i]._id%>"> Block</a></td>
+<td><a href="/admin/edit-user?id=<%= users[i]._id%>"> Unblock</a></td>
+</tr>
+<%
+  }
+}
+else{
+    %>
+  <tr> -->
+<!-- <td  colspan="5">Users Not Found</td>
+</tr>
+<%
+} 
+%>
+</table>
+<br>
+<a href="/admin/home">Go to Home</a>  -->
+<!-- <form>
+  <input type="text" placeholder="Search User name,email,address,contact" name="search">
+  <input type="submit" value="Search">
+  </form>   -->
+<table id="table_id" class="display">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Contact</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <p><%= users %></p> -->
+    <% users.forEach((user)=>{ %>
+      <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.address %></td>
+          <td><%= user.contact %></td>
+          <td>
+           <% if(user.status=="unbanned") { %>
+            <a class="btn btn-danger badge" onclick="return confirm('Are you sure want to block?')" href="/admin/block/<%= user._id %>">block</a>
+            <% }else{ %>
+              <a class="btn btn-success badge" onclick="return confirm('Are you sure want to unblock?')" href="/admin/unblock/<%= user._id %>">unblock</a>
+              <% } %>
+          </td>
+      
+      </tr>
+      <% }) %>
+  </tbody>
+</table>
+<!-- <a href="/admin/new-user" class="btn btn-primary me-3 fw-bolder ">Add New User</a> -->
+
+<%- include('../admin/layout/footer.ejs') -%> 

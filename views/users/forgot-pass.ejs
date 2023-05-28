@@ -1,0 +1,29 @@
+<!-- <% include('../layouts/header.ejs') %>
+<div style="font-family: 'Roboto', sans-serif">
+    <h1>Reset Password</h1>
+    <h4>Check your Email for OTP</h4>
+    <form action="/forgot-password" method="post">
+        <p>Reset password for <i><u><b><%= email %></b></u></i></p>
+        <input type="hidden" name="email" value="<%= email %>" /><br />
+        <input type="number" name="otp" placeholder="Enter OTP" /><br />
+        <input type="password" name="password" placeholder="Enter new Password" /><br />
+        <input type="submit" value="Reset" />
+    </form>
+</div>
+<% include('../layouts/footer.ejs') %> -->
+<!-- --------------------------------------------------------------------------------------- -->
+
+
+<% include('../layouts/header.ejs') %>
+<div style="font-family: 'Roboto', sans-serif; max-width: 400px; margin: 0 auto; padding: 20px;">
+  <h1 style="text-align: center; color: #333;">Reset Password</h1>
+  <h4 style="text-align: center; color: #666;">Check your Email for OTP</h4>
+  <form action="/forgot-password" method="post">
+    <p style="text-align: center; margin-bottom: 10px;">Reset password for <i><u><b><%= email %></b></u></i></p>
+    <input type="hidden" name="email" value="<%= email %>" /><br />
+    <input type="number" name="otp" placeholder="Enter OTP" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;" /><br />
+    <input type="password" name="password" placeholder="Enter new Password" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;" /><br />
+    <input type="submit" value="Reset" style="width: 100%; padding: 10px; background-color: #4caf50; color: #fff; border: none; border-radius: 5px; cursor: pointer;" />
+  </form>
+</div>
+<% include('../layouts/footer.ejs') %>

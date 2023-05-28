@@ -1,0 +1,125 @@
+<%- include('./layout/header.ejs', { active: 'home' })%>
+<div class="container container-full">
+    <hr />
+    <div style="display: flex;">
+        <div class="card m-2" style="width: 100%">
+            <div class="card-body">Total Users: <%- userCount %></div>
+        </div>
+        <div class="card m-2" style="width: 100%">
+            <div class="card-body">Total Revenue: $ <%- total_profit %></div>
+        </div>
+        <div class="card m-2" style="width: 100%">
+            <div class="card-body">Products: <%- productCount %></div>
+        </div>
+    </div>
+
+    <hr />
+    <div style="width: 500px">
+        <canvas id="sales-chart"></canvas>
+    </div>
+    <br>
+    <hr>
+    <div>
+        Group By:
+        <select class="group-by" onchange="changeGroupBy()">
+            <option value="">- Select Filter -</option>
+            <option value="d">Daily</option>
+            <option value="m">Monthly</option>
+            <option value="y">Yearly</option>
+        </select>
+    </div>
+    <div>
+        <canvas id="orders-chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const _ = (q) => document.querySelector(q);
+        function changeGroupBy() {
+            const select = _("select.group-by");
+            const filter = select.options[select.selectedIndex].value;
+            if (filter == "") {
+                return;
+            }
+            const url = window.location.href.split("?")[0];
+            window.location.href = `${url}?group=${filter}`;
+        }
+        const orders = JSON.parse(`<%- JSON.stringify(orders) %>`);
+        const sales = JSON.parse(`<%- JSON.stringify(salesReport) %>`)
+        window.onload = () => {
+            const canvas = _("#orders-chart");
+            const salesCanvas = _("#sales-chart");
+            new Chart(canvas, {
+                type: "bar",
+                data: {
+                    labels: orders.map((ord) => ord[0]),
+                    datasets: [
+                        {
+                            label: "Profit",
+                            data: orders.map((ord) => ord[1]),
+                            borderWidth: 1,
+                            backgroundColor: "#EB1616",
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: "#AAA",
+                            },
+                        },
+                        x: {
+                            ticks: {
+                                color: "#AAA",
+                            },
+                        },
+                    },
+                    legend: {
+                        labels: {
+                            color: "#FFF",
+                        },
+                    },
+                },
+            });
+            new Chart(salesCanvas, {
+                type: "doughnut",
+                data: {
+                    labels: sales.map(item => item._id.trim()),
+                    datasets: [
+                        {
+                            label: "Sales Report",
+                            data: sales.map(item => item.count),
+                            backgroundColor: [
+                                "#F48FB1",
+                                "#EF9A9A",
+                                "#EC407A",
+                                "#EF5350",
+                                "#E91E63",
+                                "#E53935",
+                                "#D81B60",
+                                "#C62828",
+                                "#AD1457",
+                                "#880E4F",
+                            ],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top",
+                        },
+                        title: {
+                            display: true,
+                            text: "Sales Report",
+                        },
+                    },
+                },
+            });
+        };
+    </script>
+</div>
+<%- include('./layout/footer.ejs')%>

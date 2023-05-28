@@ -1,0 +1,32 @@
+<%- include('./layout/header.ejs', { active: 'cancel-order' })%>
+<div class="container container-full">
+    <h1>Cancel Order Requests</h1>
+    <hr>
+    <table class="table">
+        <tr>
+            <th>No</th>
+            <th>Products</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Approve</th>
+            <th>Reject</th>
+        </tr>
+        <%
+            orders.forEach((order, i) => {
+                %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td><%= order.products.reduce((p, product) => p + (product.quantity || 0), 0) %></td>
+                        <td><%= order.bill_amount %></td>
+                        <td><%= order.ordered_date.toLocaleDateString("en-GB") %></td>
+                        <td><%= order.payment.payment_status %></td>
+                        <td><a href="/admin/cancel-order-request?id=<%= order._id %>&user_id=<%= order.userid %>&amount=<%= order.bill_amount %>&prod_ids=<%= order.products.map(prod => `${prod.product_id}:${prod.quantity}`).join(",") %>&status=approve" class="text-success">Approve</a></td>
+                        <td><a href="/admin/cancel-order-request?id=<%= order._id %>&status=reject" class="text-danger">Reject</a></td>
+                    </tr>
+                <%
+            })
+        %>
+    </table>
+</div>
+<%- include('./layout/footer.ejs')%>

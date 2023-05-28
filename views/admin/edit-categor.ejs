@@ -1,0 +1,17 @@
+<%- include('../admin/layout/header.ejs', { active: 'edit-category' }) -%>
+<h1>Edit Category</h1>
+<form  action="/admin/edit-category/<%=category._id%>" method="POST">
+<input type="name" name="categoryName" placeholder="Enter category Name" value="<%=category.categoryName%>" required>
+ <br><br>
+ <input type="date" name="date" placeholder="Enter the Last date" value="<%=category.date%>" required>
+ <br><br>
+ <input type="status" name="status" placeholder="Enter status" value="<%=category.status%>" required>
+ <br><br>
+ <input type="hidden" name="id" value="<%=category._id %>">
+ <input type="submit" value="Update Category">
+ <br><br>
+  <input type="submit" value="Submit">
+</form>
+<a href="/admin/">Go back</a>
+<%- include('../admin/layout/footer.ejs') -%>
+            

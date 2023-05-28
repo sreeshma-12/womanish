@@ -1,0 +1,316 @@
+<%-include('../users/layouts/header.ejs') %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+	.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity input {
+  width: 2rem;
+  text-align: center;
+}
+
+.quantity button {
+  background: none;
+  border: none;
+  width: 1rem;
+  outline: none;
+}
+/* .inputnumber::-webkit-outer-spin-button,
+.inputnumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">	
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread" class="active"><span><a href="home">Home</a></span> / <span>Shopping Cart</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg">
+					<div class="col-md-10 offset-md-1">
+						<div class="process-wrap">
+							<div class="process text-center active">
+								<p><span>01</span></p>
+								<h3>Shopping Cart</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>02</span></p>
+								<h3>Checkout</h3>
+							</div>
+							<div class="process text-center">
+								<p><span>03</span></p>
+								<h3>Order Complete</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!-- <div class="wallet text-right">
+                    <h3>Wallet: $ <%= userData.wallet || 0 %></h3>
+                </div> -->
+                <hr>
+				<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-left px-4">
+								<span>Product Details</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>Price</span>
+							</div>
+							<!-- <div class="one-eight text-center">
+								<span></span>
+							</div> -->
+							
+                         <div class="one-eight text-center">
+						     <span>Quantity</span>
+						</div>
+                            <div class="one-eight text-center">
+								<span></span>
+							</div>
+
+							<div class="one-eight text-center">
+								<span>Total</span>
+							</div>
+							<div class="one-eight text-center px-4">
+								<span>Remove</span>
+							</div>
+						</div>
+						<% let subtotal = 0 %> 
+				<% userData.cart.forEach((data)=>{ %>
+					
+					<div id="<%= data._id %>item" class="product-cart d-flex align-items-center">
+						<div class="one-forth">
+			   <img src="images/<%= data.product_id.image[0] %>" alt="img" style="height:95px">
+					<div class="display-tc">
+						<h3><%= data.product_id.name%></h3>
+							</div>
+					   </div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span id="<%= data.id %>Price" class="price"><%= data.product_id.price%></span>
+								</div>
+							</div>
+							<!-- <span class="input-group-btn">
+								<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+							   <i class="icon-minus2"></i>
+								</button>
+								</span> -->
+
+                       <!-- <div class="one-eight text-center">
+							<div class="display-tc">
+								<input type="text" id="quantity" name="quantity" class="form-control input-number text-center" value="<%= data.quantity %>" min="1" max="100">
+							</div>
+						</div> 
+						 -->
+							<!-- <span class="input-group-btn ml-1">
+								<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+								 <i class="icon-plus2"></i>
+							 </button>
+							 </span>
+                           -->
+
+						   <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+							<div class="quantity">
+							  <button class="dec-btn p-0" onclick="quantitydec('<%= data._id %>')"><i class="bi bi-caret-left-fill"></i></button>
+							  <input class="inputnumber form-control form-control-sm border-0 shadow-0 p-0" max="<%= data.product_id.stock %>" value="<%= data.quantity %>" id="<%= data.id %>Qnty" min="1" type="number"/>
+							  <button class="inc-btnss	p-0" onclick="quantity('<%= data._id %>')"><i class="bi bi-caret-right-fill"></i></button>
+							</div>
+						  </div>
+
+                           <div class="one-eight text-center">
+							<div class="display-tc">
+								<span id="<%= data._id %>TotalPrice" class="price"><%= data.product_id.price*data.quantity %></span>
+							</div>
+						</div>
+						
+						<div class="one-eight text-center">
+							<div class="display-tc">
+								<a href="#" class=""></a>
+	<form action="/delete-cart/<%=data.id%>" method="post"><button type="submit"class="btn btn-light btn-outline-success">Remove</button></form>
+							</div>
+						</div>
+					</div>
+			 <% subtotal += data.product_id.price * data.quantity%>		
+				<% }) %>
+			
+				 <div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="total-wrap">
+							<div class="row">
+								<div class="col-sm-8">
+									<form action="#">
+										 <div class="row form-group">
+											<!-- <div class="col-sm-9">
+												<input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
+											</div> -->
+											
+										</div> 
+										<div class="d-flex flex-end">
+											<input onclick="checkout()" value="Proceed to checkout" class="btn btn-primary ">
+										</div> 
+									</form>
+								</div>
+								<div class="col-sm-4 text-center">
+									<div class="total">
+										<div class="sub">
+								  
+											<p><span>Subtotal:</span> <span id="cartSubTotal"><%= subtotal%> </span></p>  
+											 			
+											<!-- <p><span>Delivery:</span> <span>0.00</span></p>   -->
+											<!-- <p><span>Discount:</span> <span>0.00</span></p> -->
+										</div>
+										<div class="grand-total">
+											<!-- <p><span><strong>Total:</strong></span> <span><%= subtotal%></span></p> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+				
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Related Products</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#"></a></h2>
+								<span class="price"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-2.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#"></a></h2>
+								<span class="price"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-3.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#"></a></h2>
+								<span class="price"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="images/item-4.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="#"></a></h2>
+								<span class="price"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+    </div>
+  <div class="gototop js-top">
+<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+ <%-include('../users/layouts/footer.ejs') %>
+<script>
+	function quantity(id) {
+		console.log(id);
+  let Qnty = Number($("#" + id + "Qnty").val());
+
+  if (Number($("#" + id + "Qnty").attr("max")) > Qnty) {
+    $.ajax({
+      type: "POST",
+      url: "/quantity",
+      data: {
+        id,
+      },
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+		console.log(data);
+      let price = Number($("#" + id + "Price").html());
+      let Qnty = Number($("#" + id + "Qnty").val());
+      let currentTotal = Number($("#cartSubTotal").html());
+      $("#" + id + "Qnty").val(Qnty + 1);
+      $("#" + id + "TotalPrice").html(price * (Qnty + 1));
+      $("#cartSubTotal").html(currentTotal + price);
+      $("#Total").html(currentTotal + price);
+    //   cartCout();
+    });
+  } else {
+	console.log("ELSE");
+    Swal.fire({
+      text: "Sorry! Limited stock",
+    });
+  }
+}
+function quantitydec(id) {
+  $.ajax({
+    type: "POST",
+    url: "/quantitydec",
+    data: {
+      id,
+    },
+    dataType: "json",
+    encode: true,
+  }).done(function (data) {
+    let price = Number($("#" + id + "Price").html());
+    let Qnty = Number($("#" + id + "Qnty").val());
+	$("#" + id + "Qnty").val(Qnty - 1);
+    $("#" + id + "TotalPrice").html(price * (Qnty-1));
+    let currentTotal = Number($("#cartSubTotal").html());
+    $("#cartSubTotal").html(currentTotal - price);
+    $("#Total").html(currentTotal - price);
+    // cartCout();
+
+    if (data == "deleted") {
+      Swal.fire("removed!", "Your product has been removed.", "success");
+      $("#" + id + "item").remove();
+    }
+  });
+}
+function checkout(){
+	$.ajax({
+    type: "POST",
+    url: "/orderid",
+    data: {},
+    dataType: "json",
+    encode: true,
+  }).done(function (data) {
+    if (data == "empty") {
+      Swal.fire("Cart is empty");
+    } else {
+      location.href = "/checkout?id="+data._id;
+    }
+  });
+}
+</script>

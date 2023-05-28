@@ -1,0 +1,134 @@
+<%-include('../layouts/header.ejs') %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProject</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- <h1>Login Now</h1> -->
+ <!-- <%
+    if(typeof message !=='undefined'){
+         %>
+         <h5><%=message %></h5>
+    <%
+    }
+%> -->
+<section class="vh-100 bg-primary">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <form action="/login" method="post"> 
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+              <div class="form-outline form-white mb-4">
+                <input type="text" name="email" placeholder="Enter email" required id="typeEmailX" class="form-control form-control-lg" />
+                <label class="form-label" for="typeEmailX">Email</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input type="text" name="password" placeholder="Enter password" required id="typePasswordX" class="form-control form-control-lg"/>
+                <label class="form-label" for="typePasswordX">Password</label>
+              </div>
+              
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="/forgot">Forgot password?</a></p>
+              <%
+            if(typeof message !=='undefined'){
+                 %>
+                 <h5 style="color: red;"><%=message %></h5>
+            <%
+            }
+        %>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" value="Login">Login</button>
+              <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+              </div>
+            </div>
+           
+            <div>
+              <p class="mb-0">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+<%-include('../layouts/footer.ejs') %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <section class="vh-100">
+       <div class="container py-5 h-100">
+       <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image">
+      
+<img src="https://d9hhrg4mnvzow.cloudfront.net/try.typeform.com/form-builder/fdeecc1e-logic-jumps_10s00oo000000000000028.png"> -->
+<!-- </div>
+ 
+  <div class="form-outline mb-4"> 
+  <input type="text" name="email"placeholder="Enter email" required id="form1Example13" class="form-control form-control-lg"/>
+  <label class="form-label" for="form1Example13">Email</label>
+  </div>
+  <br> -->
+  <!-- <div class="form-outline mb-4">
+      <input type="text" name="password" placeholder="Enter password" required id="form1Example23" class="form-control form-control-lg" />
+      <label class="form-label" for="form1Example23">Password</label>
+  </div>
+   <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+    <div class="d-flex justify-content-around align-items-center mb-4">
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked/>
+    <label class="form-check-label" for="form1Example3">Remember me</label>
+            </div>
+            <br>
+    <input class="text-center fw-bold mx-3 mb-0 text-muted" type="submit" value="Login" class="btn btn-primary btn-lg btn-block" style="background-color:blue;">   <a href="#!">Forgot password?</a> --
+    </div>
+       <div class="divider d-flex align-items-center my-4"> -->
+        <!-- <p class="text-center fw-bold mx-3 mb-0 text-muted"> Don't have an account?  <button class="btn btn-primary btn-lg btn-block" style="background-color: blue;"> Sign up </button></p>
+    </div> -->
+      <!-- <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"role="button">
+            <i class="fab fa-facebook-f me-2"></i>Continue with Facebook</a>
+          <a class="btn btn-primary btn-lg btn-block" style="background-color:#55acee" href="#!"
+            role="button">
+            <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
+          </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> -->
+ 

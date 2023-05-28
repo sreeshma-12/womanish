@@ -1,0 +1,63 @@
+<%- include('../admin/layout/header.ejs', { active: 'category' }) -%>
+<div class="page-content">
+  <div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid d-flex justify-content-between">
+      <h2 class="h5 mb-0">Categories</h2>
+      <!-- <a href="/admin/new-user" class="btn btn-primary me-3 fw-bolder ">Add New User</a> -->
+      <a href="/admin/new-category" class="btn btn-primary me-3 fw-bolder ">Add category</a>
+    </div>
+  </div>
+  <div class="container p-5">
+    <table id="myTable" class="table table-striped table-bordered table-responsive table-hover" style="color: white !important;">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Name</th>
+          <th scope="col">ID</th> 
+          <!-- <th scope="col">Status</th> -->
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Categories.forEach(function(category,i){ %>
+        <tr>
+          <td>
+            <%= i+1 %>
+          </td>
+          <td>
+            <img style="width: 80px; height:50px;" src="/images/<%= category.image %>">
+          <td>
+            <%= category.categoryName%>
+          </td>
+          <td>
+            <%= category._id%>
+          </td>
+          <!-- <td><a href="/admin/delete-category/<%= category._id %>" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Name}} ?')">Delete</a></td> -->
+         <!-- <td>
+            <% if(category.status=="Show"){ %>
+            <p class="text-success">show</p>
+            <% } else { %>
+            <p class="text-warning">Hide</p>
+            <% } %>
+          </td> -->
+          <td>
+   <div class="d-flex flex-lg-row">
+  <form action="/admin/edit-category/<%= category._id %>" method="get">
+    <a href="/admin/edit-category?id=<%= category._id %>"><button type="submit" class="btn btn-outline-warning" style="width:110px;">Edit</button></a>
+  </form>
+    <td><a href="/admin/delete-category/<%= category._id %>" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">Delete</a></td>
+      <!-- <form action="/deletecategories/<%= category._id %>/<%= category.image %>" method="post"> -->
+        <!-- <button type="submit" class="btn btn-outline-danger ms-2">Delete</button> -->
+              </form>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <br><br> 
+    <!-- <a href="/admin/new-category" class="btn btn-primary me-3 fw-bolder ">Edit category</a>  -->
+    <!-- <a href="/admin/new-category" class="btn btn-primary me-3 fw-bolder ">Update category</a>  -->
+  </div>
+  <%-include('../admin/layout/footer.ejs') -%>

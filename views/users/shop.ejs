@@ -1,0 +1,484 @@
+<%-include('../users/layouts/header.ejs') -%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-pagination/1.2.7/jquery.pagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<style>
+	.quantity {
+  display: flex;
+  align-items: center;
+}
+
+.quantity input {
+  width: 2rem;
+  text-align: center;
+}
+
+.quantity button {
+  background: none;
+  border: none;
+  width: 1rem;
+  outline: none;
+}
+.categories ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.categories li {
+    margin-right: 10px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.additional-categories {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.additional-categories a {
+    margin-right: 10px;
+}
+
+
+
+/* .inputnumber::-webkit-outer-spin-button,
+.inputnumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+<div class="breadcrumbs-two">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<!-- <div class="breadcrumbs-img" style="background-image: url(images/cover-img-1.jpg);">
+							<h2>Women's</h2> -->
+				
+						<!-- <div class="menu text-center">
+							<p><a href="#">New Arrivals</a> <a href="#">Best Sellers</a> <a href="#">Extended Widths</a> <a href="#">Sale</a></p>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+    <br><br>
+		<div class="colorlib-featured">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<div class="featured-img featured-img-2"style="background-image:url(https://i.pinimg.com/originals/e8/4d/6c/e84d6cb5b90290d744da5110fefb1586.png );">
+								<h2></h2>
+								<br><br>
+								<br>
+								<br><br><br><br><br><br>
+								<!-- <p><a href="#"class="btn btn-primary btn-lg">Product detail</a></p> -->
+				<!-- <a onclick="product-det('<%= products._id %>')"><a href="product-detail" class="btn btn-light btn-lg"></a>	-->
+                         </div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<div class="featured-img featured-img-2" style="background-image:url(https://th.bing.com/th/id/OIP.YsI7B-fBqe08NlUnEH-uOgHaHa?pid=ImgDet&w=161&h=161&c=7&dpr=1.5);">
+								
+								<h2></h2>
+								<br><br>
+								<br>
+								<br><br><br><br><br><br>
+								<!-- <p><a href="product-detail" class="btn btn-light btn-lg"></a></p> -->
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						<div class="featured">
+							<div class="featured-img featured-img-2" style="background-image:url(https://th.bing.com/th/id/OIP.wBczxXtpTQ3SKdNuppZjmgHaHa?pid=ImgDet&w=191&h=191&c=7&dpr=1.5);">
+								<h2></h2>
+								<br><br>                                                                   
+								<br>
+								<br><br><br><br><br><br>
+								<!-- <p><a href="product-detail" class="btn btn-light btn-lg"></a></p> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    <div class="row">
+</div>
+	<!-- -----------------------------old code--------------------------------------->
+         <!-- <div class="colorlib-product" class="font-weight-light" style="padding-top:10px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-xl-3">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="side border mb-1">
+									<h3> Shoe Categories</h3>
+								     <ul> 
+                 <% category.forEach((category)=>{ %>  
+  <li><a href="/shop?category=<%= category._id%>"><%= category.categoryName%></a></li>
+						   <% }) %>
+<span><a style="color:rgb(15, 210, 119);" href="normal">NORMAL</a> <a style="color:rgb(255, 0, 132);" href="/shop?category=<%= category._id%>">BOOTS</a>  <a style="color:rgb(0, 195, 255);" href="/shop?category=<%= category._id%>">SPORTS</a> <a style="color:rgb(255, 213, 0);" href="/shop?category=<%= category._id%>">FORMAL</a> <a href="partywear">PARTY WEAR</a></span>
+							</ul>
+							</div>
+							</div>
+					<div class="block-26 mb-2">
+											<h4>Price Range</h4>
+					                 <form>
+				       
+						   <div class="price-sorting">
+							<h3>Sort by Price:</h3>
+						</form>
+                        <button type="button" class="btn-info" onclick="addParam('sort', 'low')">Low to High</button>
+                        <button type="button" class="btn-info" onclick="addParam('sort', 'high')">High to Low</button>
+                                           
+									</ul>
+								</div>
+							</div> 
+				         </div>
+					</div>  -->
+<!-- --------------------------------new code---------------------------------------- -->
+ <div class="colorlib-product font-weight-light" style="padding-top:10px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-xl-3" >
+				<div class="side border mb-1">
+					<h3> Shoe Categories</h3>
+					<ul> 
+						<% category.forEach((cat)=>{ %>  
+							<!-- <a class="m-2" href="/shop?category=<%= cat._id%>"><%= cat.categoryName%></a> -->
+							<a class="m-2" onclick="addParam('category', '<%= cat._id%>', event)"><%= cat.categoryName%></a>
+						<% }) %>
+						<!-- <span>
+							<a style="color:rgb(15, 210, 119);" href="/shop?category=<%= category._id%>">NORMAL</a>
+							<a style="color:rgb(255, 0, 132);" href="/shop?category=<%= category._id%>">BOOTS</a>  
+							<a style="color:rgb(0, 195, 255);" href="/shop?category=<%= category._id%>">SPORTS</a> 
+							<a style="color:rgb(255, 213, 0);" href="/shop?category=<%= category._id%>">FORMAL</a> 
+							<a style="color:rgb(255, 0, 213);" href="/shop?category=<%= category._id%>">PARTY WEAR</a>
+						</span> -->
+					</ul>
+				</div>
+			</div>
+   
+			
+
+<div class="colorlib-product font-weight-light" style="padding-top:10px;">
+<div class="container">
+<div class="row">
+<div class="col-lg-3 col-xl-3">
+	<div class="side border mb-1">		
+			
+        <div class="col-lg-9 col-xl-9"> 
+		 <div class="block-26 mb-2">   
+			<form> 
+		<h3 style="color:cadetblue;">Price Range</h3>
+				<div class="price-sorting">
+							<h3>Sort by Price:</h3>
+						</div>
+						<button type="button" class="btn-success" onclick="addParam('sort', 'low')">Low to High</button>
+						<button type="button" class="btn-warning" onclick="addParam('sort', 'high')">High to Low</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+<!-- ------------------------------------------------------------------------------ -->
+					<!-- <div class="col-lg-9 col-xl-9">
+						<div class="row row-pb-md">
+							<div class="col-lg-4 mb-4 text-center">
+								<div class="product-entry border"> 
+									<a href="#" class="prod-img">
+										<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+									</a>  -->
+               <div class="row row-pb-md"> 
+	     <% products.forEach(function(products,i){%>
+	      <div class="col-lg-3 mb-4 text-center">
+							
+			<div class="product-entry border">
+			<a href="#" class="prod-img">
+			<img src="images/<%=products.image[0]%>" class="img-fluid" alt="Free html5 bootstrap 4 template">
+						</a>
+							 <div >
+				 <h2><a class="text-decoration-none fw-light offset fs-6" href="#"><%= products.name %></a></h2> 
+					<span class="price">₹ <%= products.price %><span>
+							  </div>
+						<div id="pagination-container"></div>
+		  <!-- <button type="button" onclick="addwishlist('<%= products._id %>')" value="submit" class="btn btn-info">Wishlist</button>  -->
+<button type="button" onclick="addwishlist('<%= products._id %>')" class="btn btn-link">
+	<i class="fa fa-heart"  style="color: rgb(236, 142, 158);"></i>
+  </button>
+<!-- <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">Add to cart</button> -->
+<!-- <a><button  type="button" onclick="loadProductdetail('<%= products._id %>')" value="submit" class="btn btn-primary">Product-detail</button></a>-->
+
+      <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">
+	    <i class="fa fa-shopping-cart"></i>
+         </button>
+         <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>
+	        </div>
+		<!-- <button type="button" class="btn btn-link"><a href="product-detail?pid=<%= products._id %>" value="submit">view</button> -->
+
+						  </div>
+						  <%})%>
+						</div>
+				        <div class="col-lg-9 col-xl-9">
+						<div class="row row-pb-md">
+							<div class="col-lg-4 mb-4 text-center">
+								<div class="product-entry border">
+					
+					<div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="block-27">
+                                <ul>
+                                    <% if(current_page - 1 > 0) { %>
+                                        <li><a onclick="addParam('page', <%= current_page-1 %>, event)"><i class="ion-ios-arrow-back"></i></a></li>
+                                    <% } %>
+                                    <% for(let i=1; i<=pages; i++) { %>
+                                        <li class="<%= i == current_page ? 'active' : '' %>"><a onclick="addParam('page', <%= i %>, event)"><%= i %></a></li>
+                                    <% } %>
+                                    <% if(current_page < pages) { %>
+                                        <li><a onclick="addParam('page', <%= current_page+1 %>, event)"><i class="ion-ios-arrow-forward"></i></a></li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+					<!-- ----------------------------------- -->
+					<!-- PAGINATION-->
+					<!-- <nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center justify-content-lg-end">
+						  <li class="page-item mx-1"><a class="page-link" href="/shop?page=1" aria-label="Previous"><span aria-hidden="true">«</span></a>
+						  </li>
+						  <li class="page-item mx-1"><a class="page-link" href="/shop?page=1">1</a></li>
+						  <li class="page-item mx-1"><a class="page-link" href="/shop?page=2">2</a>
+						  </li>
+						  <li class="page-item ms-1"><a class="page-link" href="/shop?page=2" aria-label="Next"><span aria-hidden="true">»</span></a>
+						  </li>
+						</ul>
+					  </nav> -->
+					<!-- -------------------------------------- -->
+					</div>
+				</div>
+			</div>
+		</div>
+          <!-- <div class="colorlib-partner">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Trusted Partners</h2>
+					</div>
+				</div>
+				
+			</div>
+		</div> -->
+
+		 <footer id="colorlib-footer" role="contentinfo">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col footer-col colorlib-widget">
+						<h4>About Footwear</h4>
+						<p>The right kind of women’s footwear can also do wonders for your outfits, transforming them from ordinary to outstanding.</p>
+						<p>
+							<!-- <ul class="colorlib-social-icons">
+								<li><a href="#"><i class="icon-twitter"></i></a></li>
+								<li><a href="#"><i class="icon-facebook"></i></a></li>
+								<li><a href="#"><i class="icon-linkedin"></i></a></li>
+								<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							</ul> -->
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>visit</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="/home">Home</a></li>
+								<li><a href="/contact">Contact</a></li>
+								<!-- <li><a href="#">Returns/Exchange</a></li> -->
+								<!-- <li><a href="#">Gift Voucher</a></li> -->
+								<li><a href="/shop">Wishlist & shop</a></li>
+							    
+								
+							</ul>
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>Information</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Delivery Information</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<!-- <li><a href="#">Support</a></li> -->
+								<!-- <li><a href="#">Order Tracking</a></li> -->
+							</ul>
+						</p>
+					</div>
+
+					<!-- <div class="col footer-col">
+						<h4>News</h4>
+						<ul class="colorlib-footer-links">
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="#">Press</a></li>
+							<li><a href="#">Exhibitions</a></li>
+						</ul>
+					</div> -->
+
+					<div class="col footer-col">
+						<h4>Contact Information</h4>
+						<ul class="colorlib-footer-links">
+							<li>Calicut, Kerala</li>
+							<li><a href="tel://1234567920">+ 8593931640</a></li>
+							<li><a href="mailto:info@yoursite.com">sremolu848@gmail.com</a></li>
+							<!-- <li><a href="#">yoursite.com</a></li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<p>
+							<!-- <span> Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.  -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> 
+ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </span> 
+							<span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div> 
+
+	<div class="gototop js-top">
+	<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	 <script src="js/jquery.min.js"></script> 
+	<script src="js/popper.min.js"></script> 
+	<!-- bootstrap 4.1 -->
+	<script src="js/bootstrap.min.js"></script> 
+	<!-- jQuery easing -->
+	 <script src="js/jquery.easing.1.3.js"></script> 
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script> 
+	<!-- Flexslider -->
+	 <script src="js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	 <script src="js/owl.carousel.min.js"></script> 
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script> 
+	 <script src="js/magnific-popup-options.js"></script>
+	<!-- Date Picker -->
+	 <script src="js/bootstrap-datepicker.js"></script>
+	<!-- Stellar Parallax -->
+	 <script src="js/jquery.stellar.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+
+ function addwishlist(id) {
+	      console.log(id);
+			$.ajax({
+				type: 'post',
+				url: '/addwishlist',
+				data: {
+				 proId: id
+				},
+				dataType: "JSON",
+				encode: true
+			}).done((data) => {
+				console.log(data);
+			 if (data.key == "added") {
+				Swal.fire(
+					// 'Good job!',
+					//  'You clicked the button!',
+						 'Item added to wishlist'
+				        )
+				 } else if (data == "alreadyexit") {
+					 Swal.fire({
+						// icon: 'error',
+					//  title: 'Oops...',
+					 text: 'Already added!',
+					     })
+				} else if (data == 'LOGIN FIRST') {
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Something went wrong!',
+						footer: '<a href="/login">Why do I have this issue?</a>'
+					})
+				}
+			})
+		}
+		
+		function addtocart(id) {
+		//  console.log(id);
+			   $.ajax({
+				type: 'post',
+				url: '/addtocart',
+				data: {
+				 proId: id
+				},
+				dataType: "JSON",
+				encode: true
+			}).done((data) => {
+				// alert(data)
+				console.log(data);
+				if (data.key == "added") {
+					Swal.fire(
+					//  'Good job!',
+						//  'You clicked the button!',
+						 'item added to cart'
+					    )
+				} else if (data == "alreadyexit") {
+					Swal.fire({
+						// icon: 'error',
+						// title: 'Oops...',
+						text: 'Already added!',
+
+					})
+				} 
+				// else if (data == 'LOGIN FIRST') {
+				// 	Swal.fire({
+				// 		icon: 'error',
+				// 		title: 'Oops...',
+				// 		text: 'Something went wrong!',
+				// 		footer: '<a href="/login">Why do I have this issue?</a>'
+				// 	})
+				// }
+			})
+		}
+       $(function() {
+    var productList = $('#product-list');
+    var numItems = productList.children().length;
+    var itemsPerPage = 9;
+    
+    productList.pagination({
+        items: numItems,
+        itemsOnPage: itemsPerPage,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber) {
+            // This function will be called each time a pagination link is clicked
+            // You can use it to update the product list with the items for the selected page
+        }
+    });
+});
+function showPage(pageNumber) {
+    var startIndex = (pageNumber - 1) * itemsPerPage;
+    var endIndex = startIndex + itemsPerPage;
+    
+    productList.children().css('display', 'none')
+                         .slice(startIndex, endIndex)
+                         .css('display', 'block');
+}
+
+
+</script>
+<!-- <% include('../users/layouts/footer.ejs') %> -->

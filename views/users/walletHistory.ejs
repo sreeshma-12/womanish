@@ -1,0 +1,111 @@
+<%-include('../users/layouts/header.ejs') -%>
+<div class="page-holder">
+  <div class="container">
+    <!-- HERO SECTION-->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+          <div class="col-lg-6">
+            <h1 class="h2 text-uppercase mb-0">Wallet history</h1>
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
+                <li class="breadcrumb-item"><a class="text-dark" href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Wallet history</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="page-content">
+      <div class="widget-content widget-content-area add-manage-product-2 container mt-3">
+        <div class="row ">
+          <div class="col-md-2 ">
+            <div class="card card-default " style="border-color: white !important; color: black !important;">
+              <div class="card border-0 ad-box-shadow p-0 ">
+                <div class="card-body col-sm-112">
+                  <div id="dragged_images">
+                  </div>
+                  <div class=" d-flex justify-content-center mt-4">
+                    <div class=" ">
+                      <a class="btn btn-sm btn-block d-flex align-items-center justify-content-center text-light " href="/account" style="background-color: rgb(63, 63, 63)">Account</a>
+                      <a class="btn btn-sm btn-block  d-flex align-items-center justify-content-center px-0 text-light mt-3" href="" style="background-color: rgb(63, 63, 63)">Change Password</a>
+                      <a class="btn btn-sm btn-block  d-flex align-items-center justify-content-center px-0 text-light mt-3" href="/orderDetails" style="background-color: rgb(63, 63, 63)">Order Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" col-md-10 ">
+            <div class="admincard card card-default" style="border-color: white !important;">
+              <div class="card-body ">
+                <div class="card-body ">
+                  <% if(data.length==0){ %>
+                  <h3 class="text-center">No WalletHistory</h3>
+                  <% }else{ %>
+                  <div class="table-responsive mb-4 border border-2 border-black">
+                    <table class="table text-nowrap">
+                      <thead class="bg-light">
+                        <tr>
+                          <th class="border-0 p-3 ps-3" scope="col"> <strong class="text-sm text-uppercase">Ordered Date</strong></th>
+                          <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Address</strong></th>
+                          <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total price</strong></th>
+                          <th class="border-0 p-3 text-center" scope="col"> <strong class="text-sm text-uppercase">status</strong></th>
+                          <th class="border-0 p-3 text-center" scope="col"> <strong class="text-sm text-uppercase">View detials</strong></th>
+                        </tr>
+                      </thead>
+                      <tbody class="border-0">
+                        <% data.forEach((val) => { %>
+                        <tr>
+                          <th class="ps-0 py-3 border-light ps-3" scope="row">
+                            <div class="d-flex align-items-center ">
+                              <%= val.ordered_date.getDate() %>/<%= val.ordered_date.getMonth()+1 %>/<%= val.ordered_date.getFullYear() %>
+                            </div>
+                          </th>
+                          <th class="ps-0 py-3 border-light align-middle" scope="row">
+                            <%= val.address.name %>
+                          </th>
+                          <td class="p-3 align-middle border-light">
+                            <% if(val.payment.payment_status=='refund completed'){ %>
+                            <span class="text-success">+<%= val.bill_amount %> </span>
+                            <% }else{ %>
+                            <span class="text-danger">-<%= val.bill_amount %> </span>
+                            <% } %>
+                          </td>
+                          <td class="p-3 align-middle border-light ps-5">
+                            <%  if(val.delivery_status.canceled.state){ %>
+                            <span class="badge border border-danger text-danger px-2 py-1  fw-bold">CANCELED</span>
+                            <%  }else if(val.delivery_status.returned.state){ %>
+                            <span class="badge border border-warning text-warning px-2 py-1  fw-bold">RETURNED</span>
+                            <% }else if(val.delivery_status.delivered.state){ %>
+                            <span class="badge border border-success text-success px-2 py-1  fw-bold">DELIVERED</span>
+                            <% }else if(val.delivery_status.out_for_delivery.state){ %>
+                            <span class="badge border border-primary text-primary px-2 py-1  fw-bold">OUT_FOR_DELIVERY</span>
+                            <% }else if(val.delivery_status.shipped.state){ %>
+                            <span class="badge border border-info text-info px-2 py-1  fw-bold">SHIPPED</span>
+                            <% }else if(val.delivery_status.ordered.state){ %>
+                            <span class="badge border border-black text-black px-2 py-1  fw-bold">ORDERED</span>
+                            <% } %>
+                          </td>
+                          <td class="p-3 align-middle border-light ps-5">
+                            <a href="/viewOrder/<%= val._id %>"><i class="bi bi-eye text-black"></i></a>
+                          </td>
+                          </td>
+                        </tr>
+                        <% })} %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%-include('../users/layouts/footer.ejs') -%>

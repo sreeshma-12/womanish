@@ -1,0 +1,21 @@
+<% include('../layouts/header.ejs', { active: 'users' })  %>
+<h1>Edit User</h1>
+
+<form  action="" method="POST">
+ <input type="name" name="name" placeholder="Enter Name" value="<%=user.name%>" required>
+ <br><br>
+ <input type="email" name="email" placeholder="Enter Email" value="<%= user.email%>" required>
+ <br><br>
+ <input type="address" name="address" placeholder="Enter address" value="<%= user.address%>" required>
+ <br><br>
+ <input type="contact" name="contact" placeholder="Enter Contact" value="<%= user.contact%>" required>
+ <br><br>
+ <input type="hidden" name="id" value="<%=user._id %>" >
+ <input type="submit" value="Update User">
+ <br><br>
+ <input type="submit" value="Block User">
+</form>
+<a href="/admin/">Go to Dashboard</a>
+
+<% include('../layouts/footer.ejs')  %>
+            

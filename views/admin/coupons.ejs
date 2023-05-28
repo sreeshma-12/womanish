@@ -1,0 +1,181 @@
+<%- include('../admin/layout/header.ejs', { active: 'coupons' }) -%>
+
+<!--add Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/addcoupon/<%= coupon._id %>" method="post" ~>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Name</label>
+            <input type="text" id="form3Example3" class="form-control bg-dark" name="couponName" required />
+
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Coupon code</label>
+            <input type="text" id="form3Example3" class="form-control bg-dark" name="couponCode" required />
+
+          </div>
+
+          <!-- amount input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">percentage</label>
+            <input type="text" class="form-control  bg-dark" name="percentage" required />
+          </div>
+
+          <!-- amount input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">minimumAmount</label>
+            <input type="number" class="form-control  bg-dark" name="minimumAmount" required />
+
+          </div>
+
+          <!-- date input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example4">Exp Date</label>
+            <input type="date" id="form3Example3" class="form-control  bg-dark" name="expDate" required />
+          </div>
+
+          <!-- Submit button -->
+          <div class="d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- editModal -->
+<div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Coupon</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="actionmodel" method="post">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Coupon Name</label>
+            <input type="text" class="form-control bg-dark" value="<%= coupon.couponName%>" name="couponName" id="couponName"/>
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Coupon code</label>
+            <input type="text" class="form-control bg-dark" id="couponCode" name="couponCode" />
+          </div>
+
+          <!-- amount edit input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">percentage</label>
+            <input type="text" class="form-control  bg-dark" id="percentage" name="percentage" />
+          </div>
+
+          <!-- date edit input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example4">Exp Date</label>
+            <input type="datetime" class="form-control  bg-dark" id="expDate" name="expDate" />
+          </div>
+
+          <!-- Submit edit button -->
+          <div class="d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-content">
+  <div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid d-flex justify-content-between">
+      <h2 class="h5 mb-0">COUPON</h2>
+      <a href="#">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add coupon
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="container p-5 ">
+    <table id="myTable" class="table table-striped table-bordered table-responsive table-hover">
+      <thead>
+        <tr>
+          <th scope="col"> SL.No</th>
+          <th scope="col">COUPON NAME</th>
+          <th scope="col">COUPON CODE</th>
+          <th scope="col">PERCENTAGE</th>
+          <th scope="col">MINIMUM AMOUNT</th>
+          <th scope="col">EXP DATE</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% coupon.forEach(function(coup,i) { %>
+        <tr>
+          <td>
+            <%= i+1 %>
+          </td>
+          <td>
+            <%= coup.couponName%>
+          </td>
+          <td>
+            <%= coup.couponCode%>
+          </td>
+          <td>
+            <%= coup.percentage%>
+          </td>
+          <td>
+            <%= coup.minimumAmount%>
+          </td>
+           <td>
+            <%= coup.expiryDate.toLocaleString()%>
+          </td> 
+          <td>
+            <div class="d-flex flex-lg-row justify-content-center">
+              <form method="post">
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editModal" onclick="coupon('<%= coup._id %>')">
+                  Edit
+                </button></a>
+              </form>
+             
+              <form action="/deleteCoupon/<%= coup._id %>" method="post">
+        <td><a href="/admin/deleteCoupon/<%= coup._id %>" class="btn btn-danger" onclick="return confirm('Are you sure want to delete ?')">Delete</a></td>        
+                <!-- <button type="submit" class="btn btn-outline-danger ms-2 ">Delete</button> -->
+              </form>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  function coupon(id) {
+    $.ajax({
+      type: "POST",
+      url: "/editcoupon",
+      data: {
+        id
+      },
+      dataType: "json",
+      encode: true,
+    }).done(function(data) {
+      $('#actionmodel').attr('action', '/updateCoupon/' + data._id)
+      $('#couponName').val(data.couponName)
+      $('#couponCode').val(data.couponCode)
+      $('#percentage').val(data.percentage)
+      $('#Amount').val(data.amount)
+      $('#expDate').val(data.expiryDate)
+    });
+  }
+</script>
+<%-include('../admin/layout/footer.ejs') -%>

@@ -1,0 +1,27 @@
+<%- include('./layout/header.ejs', { active: 'new-user' })%>
+<h1>Add New User</h1>
+<form  action="" method="post" >
+<input type="text" name="name" placeholder="Enter Name" required>
+<br><br>
+<input type="text" name="email" placeholder="Enter Email" required>
+<br><br>
+<input type="text" name="address" placeholder="Enter Address" required>
+<br><br>
+<input type="text" name="contact" placeholder="Enter Contact Number" required>
+<br><br>
+<!-- <input type="file" name="image" placeholder="choose file" required> -->
+<!-- <br><br> -->
+<!-- <input type="text" name="password" placeholder="Enter Password" required> -->
+<br><br>
+<input type="submit" value="Add User">
+</form>
+<% 
+if(typeof message !='undefined'){
+%>
+<p style="color:red;"><%= message %></p>
+<%
+} 
+%>
+<a href="/admin/dashboard">Go Back</a>
+
+<%- include('./layout/footer.ejs')%>

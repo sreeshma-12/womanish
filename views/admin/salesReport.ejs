@@ -1,0 +1,51 @@
+<%- include('../admin/layout/header.ejs', { active: 'sales-report' }) -%>
+<style>
+  td,
+  label,
+  input,
+  select {
+    color: black !important;
+  }
+</style>
+<div class="page-content">
+  <div class=" py-4">
+    <div class="container-fluid">
+      <h2 class="h5 mb-0">salesReport</h2>
+    </div>
+    <div class="container  my-2">
+      <div class=" w-100">
+        <div class="col-12 col-md-6 mx-auto  p-5 text-white">
+          <form action="/salesDetails" method="post" id="reportForm">
+            <div class="mb-1">
+              <label for="" class=" text-white">Report</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-table"></i></span>
+                <select name="selectoption" id="report" class="form-control" aria-placeholder="select" required>
+                  <option value="">Select Options</option>
+                  <option value="sales">Sales</option>
+                  <option value="return">Return</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-1">
+              <label for="" class=" text-white">
+                Date (from - to)
+              </label>
+              <div class="input-group mb-3">
+                <input type="datetime-local" class="form-control" name="from" placeholder="Date" aria-label="Date" id="fromDate" onchange="changeAction()">
+              </div>
+              <div class="input-group mb-3">
+                <input type="datetime-local" class="form-control" name="to" placeholder="toDate" aria-label="toDate" id="toDate" onchange="changeAction()">
+              </div>
+            </div>
+            <div class="mb-1">
+              <button type="submit" class="btn btn-success w-100" id="reportBtn"> Open Report <i class="bi bi-box-arrow-right"></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </script>
+ 
+  <%- include('../admin/layout/footer.ejs') -%>
