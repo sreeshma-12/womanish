@@ -282,8 +282,8 @@
 			
 			    <container>
 			   <!-- <div class="w-100" style="padding-left: 5px;"></div> -->
-			              <div class="col-lg-20">
-								<div class="cart-detail" style="padding-left: 10px;">
+			              <div class="col-lg-20" >
+								<div style="padding-left: 10px;" id="paymentmethod">
 									<h2>Payment Method</h2>
 									<div class="form-group">
 										<div class="col-md-12">
@@ -335,6 +335,8 @@
 								</li> 
 						<li>
 					<input type="text" class="d-none" value="<%= subtotal %>" id="subtotal">
+          <input type="text" class="d-none" value="" id="couponcode">
+          
 					 <!-- <span>Discount</span> <span>< %= discountAmount %></span> -->
 					</li>
 					        <li>

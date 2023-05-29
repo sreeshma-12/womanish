@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
             document.getElementById("ordertotal").innerHTML = subTotal - dPrice;
             document.getElementById("couponStatus").innerHTML =
               "Coupon code available";
+              document.getElementById("couponcode").value=couponCode
             document.getElementById("couponStatus").style =
               "display:block;color:green;";
             var myModalEl = document.getElementById("closeCoupon");

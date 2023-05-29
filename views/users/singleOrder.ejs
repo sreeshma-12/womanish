@@ -41,6 +41,15 @@
                 id="exampleModalLabel"
               ></h5>
               <h4 class="mb-5" style="color: #35558a">Thanks for your order</h4>
+              <div class="card">
+                <h6>Delivery address</h6>
+                <p>
+                  <%= order.address.fname %> ,<%= order.address.house %> , <%=
+                  order.address.post %>, <%= order.address.city %> , <%=
+                  order.address.district %>
+                </p>
+              </div>
+
               <p class="mb-0" style="color: #35558a">Payment summary</p>
               <hr
                 class="mt-2 mb-4"
@@ -53,8 +62,12 @@
               />
 
               <div class="d-flex justify-content-between">
-                <p class="fw-bold mb-0">Shoes (Qty:2)</p>
-                <p class="text-muted mb-0">1250.00</p>
+                <p>
+                  Items : (<% order.products.forEach(item=>{ %>
+                  <span><%= item.name %>, </span>
+                  <% }) %> )
+                </p>
+                <p class="fw-bold mb-0">(Qty:<%= order.products.length %>)</p>
               </div>
 
               <!-- <div class="d-flex justify-content-between">
@@ -64,18 +77,21 @@
 
               <div class="d-flex justify-content-between pb-1">
                 <p class="small">Discount</p>
-                <p class="small">200.00</p>
+                <p class="small">100.1</p>
               </div>
 
               <div class="d-flex justify-content-between">
                 <p class="fw-bold">Total</p>
-                <p class="fw-bold" style="color: #35558a">2300.00</p>
+                <p class="fw-bold" style="color: #35558a">
+                  <%= order.bill_amount%>
+                </p>
               </div>
             </div>
             <div
               class="modal-footer d-flex justify-content-center border-top-0 py-4"
             >
               <button
+                href="shop"
                 type="button"
                 class="btn btn-primary btn-lg mb-1"
                 style="background-color: #35558a"
@@ -91,108 +107,3 @@
   </div>
 </section>
 <%-include('../users/layouts/footer.ejs') -%>
-<!-- ---------------------------------------------------------------------->
-<%-include('../users/layouts/header.ejs') -%>
-<style>
-  td,
-  label,
-  input {
-    color: black !important;
-  }
-</style>
-<div class="page-content">
-  <div class="bg-dash-dark-2 py-4">
-    <div class="container-fluid d-flex justify-content-between">
-      <h2 class="h5 mb-0">Order detials</h2>
-    </div>
-  </div>
-  <div class="widget-content container mt-3">
-    <div class="row">
-      <div class="card-heading text-center">
-        <h2 class="card-title mb-3"><span>Order Details</span></h2>
-      </div>
-      <div id="message"></div>
-      <div class="card p-0 my-2 text-black">
-        <div class="card-header">Bill Details</div>
-        <div class="card-body">
-          <div class="d-flex flex-wrap">
-            <div class="col-12 col-lg-6">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <td>Payment Status</td>
-                    <td id="status">
-                      <%= singleorder.payment.payment_status %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Payment method</td>
-                    <td><%= singleorder.payment.payment_method %></td>
-                  </tr>
-                  <tr>
-                    <td>Payment id</td>
-                    <td><%= singleorder.payment.payment_id %></td>
-                  </tr>
-                  <tr>
-                    <td>Order id</td>
-                    <td><%= singleorder._id %></td>
-                  </tr>
-                  <tr>
-                    <td>Coupon</td>
-                    <td>
-                      <% if(singleorder.coupon.name){ %> <%=
-                      singleorder.coupon.name %>
-                      <small>(<%= singleorder.coupon.code %> )</small>
-                      <% }else{ %> No_coupon <% } %>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-12 col-lg-6">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <td>Sub-total</td>
-                    <td>
-                      <i class="bi bi-currency-rupee"></i><%=
-                      singleorder.bill_amount %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Items</td>
-                    <td><%= singleorder.products.length %></td>
-                  </tr>
-                  <tr>
-                    <td>Discount</td>
-                    <td>%<%= singleorder.coupon.discount %></td>
-                  </tr>
-                  <tr>
-                    <td>Discount amount</td>
-                    <td>
-                      <i class="bi bi-currency-rupee"></i>
-                      <%=
-                      (Math.round((singleorder.bill_amount*singleorder.coupon.discount)/100))
-                      %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td>
-                      <b class="text-danger fw-bold"
-                        ><i class="bi bi-currency-rupee"></i> <%=
-                        (Math.round(singleorder.bill_amount-(singleorder.bill_amount*singleorder.coupon.discount)/100))
-                        %>
-                      </b>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<%-include('../users/layouts/footer.ejs')-%>
