@@ -92,14 +92,18 @@ const cancelOrderProcess = async (req, res) => {
                 })
             )
         );
+        const amt = amount + parseInt(req.query.amount)
         await userModel.updateOne(
             {
                 _id: new ObjectId(req.query.user_id),
             },
             {
                 $set: {
-                    wallet: amount + parseInt(req.query.amount),
+                    wallet: amt,
                 },
+                $push: {
+                    wallet_history: amt
+                }
             }
         );
     }

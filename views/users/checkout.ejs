@@ -106,12 +106,27 @@
 </style>	
 
 <script>
+    const _ = q => document.querySelector(q)
 
     function selectAddressData() {
         const address = JSON.parse(document.querySelector("#address1").value);
         ["fname", "city", "district", "state", "post", "pin", "phone" ].forEach(k => {
             document.querySelector(`#address-${k}`).value = address[k]
         })
+    }
+
+    function editAddress(event, val) {
+        $('#addressEditModal').modal('show');
+        val = JSON.parse(val)
+        _("#eoldname").value = val.name
+        _("#efname").value = val.fname
+        _("#ename").value = val.name
+        _("#ecity").value = val.city
+        _("#edistrict").value = val.district
+        _("#estate").value = val.state
+        _("#epost").value = val.post
+        _("#epin").value = val.pin
+        _("#ephone").value = val.phone
     }
 </script>
 
@@ -580,6 +595,57 @@
         </div>
     </div>
 </div>
+<div class="modal fade border-5" id="addressEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit ADDRESS</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#addressEditModal').modal('hide');">X</button>
+            </div>
+            <div class="modal-body">
+                <form id="actionmodel" action="/editaddress" method="post">
+                    <input type="hidden" id="eoldname" name="oldname">
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">First Name</label>
+                        <input type="text" id="efname" class="form-control" name="fname" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">Address Name (eg: House-2, Work)</label>
+                        <input type="text" class="form-control" name="name" id="ename" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">City</label>
+                        <input type="text" id="ecity" class="form-control" name="city" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">District</label>
+                        <input type="text" id="edistrict" class="form-control" name="district" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example3">State</label>
+                        <input type="text" class="form-control" id="estate" name="state" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Post</label>
+                        <input type="text" id="epost" class="form-control" name="post" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Pin</label>
+                        <input type="number" id="epin" class="form-control" name="pin" required />
+                    </div>
+                    <div class="form-outline mb-1">
+                        <label class="form-label" for="form3Example4">Phone</label>
+                        <input type="number" id="ephone" class="form-control" name="phone" required />
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <input type="hidden" value="/cart" name="whereto">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- addresses -->
 
 <div class="border p-2 mt-2" id="">
@@ -601,6 +667,7 @@
                     <p id="p"><b> <%= val.name%></b>, <%= val.post +', ' +val.pin+', '+ val.city +', ' +val.district+', '+val.state  +', '+  val.phone %></p>
 
                 </div>
+                <a class="text-info text-right" onclick="editAddress(event, '<%= JSON.stringify(val) %>')" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
                 <a class="text-danger text-right" href="/delete-address?name=<%= val.name%>&whereto=/cart">Delete</a>
                 <!-- <a class="text-success text-lg-end text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editaddress('<%=val._id %>')" href="#"
                     ><small><i class="bi bi-pencil-square"></i> Edit</small>
