@@ -381,8 +381,7 @@
 
       <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">
 	    <i class="fa fa-shopping-cart"></i>
-         </button>
-         <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>
+         </button> <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>
 	        </div>
 		<!-- <button type="button" class="btn btn-link"><a href="product-detail?pid=<%= products._id %>" value="submit">view</button> -->
 

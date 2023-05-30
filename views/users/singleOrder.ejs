@@ -41,13 +41,28 @@
                 id="exampleModalLabel"
               ></h5>
               <h4 class="mb-5" style="color: #35558a">Thanks for your order</h4>
-              <div class="card">
+               <div class="card">
                 <h6>Delivery address</h6>
                 <p>
+                   <label style="display: inline-block; width: 80px">First Name:</label><%= order.address.fname %><br />
                   <%= order.address.fname %> ,<%= order.address.house %> , <%=
                   order.address.post %>, <%= order.address.city %> , <%=
                   order.address.district %>
                 </p>
+              </div> 
+              <div
+                class="card"
+                style="
+                  padding: 10px;
+                  border: 1px solid #ccc;
+                  border-radius: 5px;
+                "
+              >
+                <h6 style="margin-bottom: 10px">Ordered Items</h6>
+                <p>
+                 <%= order.products[0].product_id.image[0] %> 
+                  
+              </p>
               </div>
 
               <p class="mb-0" style="color: #35558a">Payment summary</p>
@@ -70,14 +85,14 @@
                 <p class="fw-bold mb-0">(Qty:<%= order.products.length %>)</p>
               </div>
 
-              <!-- <div class="d-flex justify-content-between">
-                <p class="small mb-0">Shipping</p>
-                <p class="small mb-0">175.00</p>
-              </div> -->
+               <!-- <div class="d-flex justify-content-between">
+                <p class="small mb-0">Items</p>
+                
+              </div>  -->
 
               <div class="d-flex justify-content-between pb-1">
                 <p class="small">Discount</p>
-                <p class="small">100.1</p>
+                <p class="small"><%= order.coupon.discount%></p>
               </div>
 
               <div class="d-flex justify-content-between">
@@ -91,7 +106,7 @@
               class="modal-footer d-flex justify-content-center border-top-0 py-4"
             >
               <button
-                href="shop"
+                href="/shop"
                 type="button"
                 class="btn btn-primary btn-lg mb-1"
                 style="background-color: #35558a"

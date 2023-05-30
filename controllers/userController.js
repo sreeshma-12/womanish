@@ -597,8 +597,9 @@ const addwishlist = async (req, res, next) => {
 const addaddress = async (req, res, next) => {
   try {
     const id = new ObjectId(req.session.user_id);
-    // console.log(req.body)
+     console.log(req.body,"addddrrr")
     let newaddress = {
+      fname:req.body.fname,
       name: req.body.name,
       city: req.body.city,
       district: req.body.district,
@@ -612,7 +613,7 @@ const addaddress = async (req, res, next) => {
       { _id: id },
       { $push: { useraddress: newaddress } }
     );
-    res.redirect(req.body.whereto || "/account");
+    res.redirect("back");
   } catch (error) {
     next(error);
   }
@@ -1191,8 +1192,10 @@ const wallet = async (req, res, next) => {
   }
 };
 
-const orderli = (req, res, next) => {
+const orderli = async (req, res, next) => {
   try {
+    // const order = await orderModel.findById(orderid).populate("products.product");
+    //  const productImage = order.products[0].product.image;
     console.log(req.params.id, "ID");
     orderModel
       .findOne({ _id: req.params.id })
@@ -1204,6 +1207,7 @@ const orderli = (req, res, next) => {
           //  admin: res.locals.admindata.name,
           ustatus: "false",
           order,
+          // image
         });
       });
   } catch (error) {
