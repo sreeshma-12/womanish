@@ -77,7 +77,9 @@
           <td><%= order._id %></td>
           <td><%= order.userid.name %></td>
           <td><%= order.products.length %></td>
-          <td><%= order.products.name %></td>
+          <td><% order.products.forEach(item=>{ %>
+                  <span><%= item.name %>, </span>
+                  <% }) %> </td>
           <td>
             <%= order.ordered_date.getDate() %>/<%=
             order.ordered_date.getMonth()+1 %>/<%=
