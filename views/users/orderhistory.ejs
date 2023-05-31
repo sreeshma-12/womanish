@@ -270,7 +270,7 @@
                                         <table class="table table-bordered text-nowrap">
                                             <thead class="bg-light">
                                                 <tr>
-                                                    <th class="border-0 p-3 ps-3" scope="col">#</th>
+                                                    <!-- <th class="border-0 p-3 ps-3" scope="col">#</th> -->
                                                     <th class="border-0 p-3 ps-3" scope="col">Order ID</th>
                                                     <th class="border-0 p-3 ps-3" scope="col">Ordered Date</th>
                                                     <th class="border-0 p-3 ps-3" scope="col">Items</th>
@@ -284,11 +284,11 @@
                                             <tbody class="border-0">
                                                 <% orderDetails.forEach((order, i) => { %>
                                                 <tr>
-                                                    <td class="ps-0 py-3 border-light ps-3"><%= i+1 %></td>
-                                                    <td><%= order._id %></td>
-                                                    <td class="d-flex align-items-center"><%= order.ordered_date.getDate() %>/<%= order.ordered_date.getMonth()+1 %>/<%= order. ordered_date.getFullYear() %></td>
-                                                    <td><%= order.products.length %></td>
-                                                    <td><%= order.bill_amount %></td>
+                                                    <!-- <td class="ps-0 py-3 border-light ps-3"><%= i+1 %></td> -->
+                                                    <td class="align-middle"><%= order._id %></td>
+                                                    <td class="align-middle"><%= order.ordered_date.getDate() %>/<%= order.ordered_date.getMonth()+1 %>/<%= order. ordered_date.getFullYear() %></td>
+                                                    <td class="align-middle"><%= order.products.length %></td>
+                                                    <td class="align-middle"><%= order.bill_amount %></td>
                                                     <td class="p-3 align-middle border-light ps-5">
                                                         <% if(order.order_status.trim()=='pending'){ %>
                                                             <span class="badge border border-warning text-warning px-2 py-1 rounded-3 fw-bold"> <%= order.order_status %> </span>
@@ -299,12 +299,12 @@
                                                         <% } %>
                                                     </td>
                                                     <td class="p-4 text-center border-light">
-                                                        <a href="/orderDetails/<%= order._id%>" class="btn btn-sm btn-block d-flex align-items-center justify-content-center px-0 text-light mt-3" style="background-color: rgb(63, 63, 63)">Order Details</a>
+                                                        <a href="/orderDetails/<%= order._id%>" class="btn btn-sm btn-block d-flex align-items-center justify-content-center text-light mt-3" style="background-color: rgb(63, 63, 63)">Order Details</a>
                                                     </td>
-                                                    <td class="p-4 text-center border-light">
+                                                    <td class="p-4 text-center border-light align-middle">
                                                         <a href="cancel-order?id=<%= order._id %>" class="text-danger">Cancel</a>
                                                     </td>
-                                                    <td class="p-4 text-center border-light">
+                                                    <td class="p-4 text-center border-light align-middle">
                                                         <% if(order.order_status.trim()=='completed' && ((new Date() - order.ordered_date) <= 2*7*24*60*60*1000)) { %>
                                                             <a href="return-order?id=<%= order._id %>" class="text-warning">Return</a>
                                                         <% } %>

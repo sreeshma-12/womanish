@@ -15,7 +15,7 @@
         /* Product Card */
         .product-entry {
             border: 1px solid #ccc;
-            padding: 20px;
+            padding: 10px 5px;
         }
         
         .prod-img img {
@@ -93,7 +93,7 @@
         
         /* Additional Styles */
         .colorlib-product {
-            padding-top: 10px;
+            padding: 10px;
         }
         
         .side {
@@ -212,7 +212,7 @@
 			</div>
 		</div>
     <br><br>
-		<div class="colorlib-featured">
+		<!-- <div class="colorlib-featured">
 			<div class="container">
       <div class="row">
 				<% banners.forEach(item=>{ %>
@@ -231,7 +231,7 @@
 					<% }) %>
 			   </div>
 
-       <!-- <div class="row">
+       <div class="row">
 					<div class="col-sm-4 text-center">
 						<div class="featured">
 							<div class="featured-img featured-img-2"style="background-image:url(https://i.pinimg.com/originals/e8/4d/6c/e84d6cb5b90290d744da5110fefb1586.png );">
@@ -267,8 +267,8 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
-			</div>
+				</div>
+			</div> -->
 		</div>
     <div class="row">
 </div>
@@ -308,48 +308,36 @@
  <div class="colorlib-product font-weight-light" style="padding-top:10px;">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-xl-3" >
+			<div class="col-lg-6 col-xl-6" >
 				<div class="side border mb-1">
-					<h3> Shoe Categories</h3>
+                    <h3 style="color:cadetblue;">Category</h3><br>
 					<ul> 
 						<% category.forEach((cat)=>{ %>  
-							<!-- <a class="m-2" href="/shop?category=<%= cat._id%>"><%= cat.categoryName%></a> -->
-							<a class="m-2" onclick="addParam('category', '<%= cat._id%>', event)"><%= cat.categoryName%></a>
+							<a class="m-2 text-success" style="float: left; cursor: pointer; font-weight: 400" onclick="addParam('category', '<%= cat._id%>', event)"><%= cat.categoryName%></a>
 						<% }) %>
-						<!-- <span>
-							<a style="color:rgb(15, 210, 119);" href="/shop?category=<%= category._id%>">NORMAL</a>
-							<a style="color:rgb(255, 0, 132);" href="/shop?category=<%= category._id%>">BOOTS</a>  
-							<a style="color:rgb(0, 195, 255);" href="/shop?category=<%= category._id%>">SPORTS</a> 
-							<a style="color:rgb(255, 213, 0);" href="/shop?category=<%= category._id%>">FORMAL</a> 
-							<a style="color:rgb(255, 0, 213);" href="/shop?category=<%= category._id%>">PARTY WEAR</a>
-						</span> -->
 					</ul>
 				</div>
 			</div>
-   
+            <div class="col-lg-6 col-xl-6">
+                <div class="side border mb-1">		
+                    <div class="col-lg-9 col-xl-9"> 
+                    <div class="block-26 mb-2">   
+                        <form> 
+                            <h3 style="color:cadetblue;">Sort by Price</h3><br>
+                            <a class="btn-success p-2 m-2" style="cursor: pointer; color: #FFF; font-weight: 400" onclick="addParam('sort', 'low', event)">Low to High</a>
+                            <a class="btn-success p-2 m-2" style="cursor: pointer; color: #FFF; font-weight: 400" onclick="addParam('sort', 'high', event)">High to Low</a>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
 			
 
 <div class="colorlib-product font-weight-light" style="padding-top:10px;">
 <div class="container">
 <div class="row">
-<div class="col-lg-3 col-xl-3">
-	<div class="side border mb-1">		
-			
-        <div class="col-lg-9 col-xl-9"> 
-		 <div class="block-26 mb-2">   
-			<form> 
-		<h3 style="color:cadetblue;">Price Range</h3>
-				<div class="price-sorting">
-							<h3>Sort by Price:</h3>
-						</div>
-						<button type="button" class="btn-success" onclick="addParam('sort', 'low')">Low to High</button>
-						<button type="button" class="btn-warning" onclick="addParam('sort', 'high')">High to Low</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+
+</div>
 
 <!-- ------------------------------------------------------------------------------ -->
 					<!-- <div class="col-lg-9 col-xl-9">
@@ -359,36 +347,31 @@
 									<a href="#" class="prod-img">
 										<img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
 									</a>  -->
-               <div class="row row-pb-md"> 
-	     <% products.forEach(function(products,i){%>
-	      <div class="col-lg-3 mb-4 text-center">
-							
-			<div class="product-entry border">
-			<a href="#" class="prod-img">
-			<img src="images/<%=products.image[0]%>" class="img-fluid" alt="Free html5 bootstrap 4 template">
-						</a>
-							 <div >
-				 <h2><a class="text-decoration-none fw-light offset fs-6" href="#"><%= products.name %></a></h2> 
-					<span class="price">₹ <%= products.price %><span>
-							  </div>
-						<div id="pagination-container"></div>
-		  <!-- <button type="button" onclick="addwishlist('<%= products._id %>')" value="submit" class="btn btn-info">Wishlist</button>  -->
-<button type="button" onclick="addwishlist('<%= products._id %>')" class="btn btn-link">
-	<i class="fa fa-heart"  style="color: rgb(236, 142, 158);"></i>
-  </button>
-<!-- <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">Add to cart</button> -->
-<!-- <a><button  type="button" onclick="loadProductdetail('<%= products._id %>')" value="submit" class="btn btn-primary">Product-detail</button></a>-->
+               <div class="" style="display: flex; flex-wrap: wrap"> 
+                <% products.forEach(function(products,i){%>
+                            <a href="/productdetails?pid=<%= products._id %>" class="col-lg-3" style="text-decoration: none!important">
+                                <div class="mb-4 text-center">
 
-      <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">
-	    <i class="fa fa-shopping-cart"></i>
-         </button> <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>
-	        </div>
-		<!-- <button type="button" class="btn btn-link"><a href="product-detail?pid=<%= products._id %>" value="submit">view</button> -->
-
-						  </div>
-						  <%})%>
+                                    <div class="product-entry border">
+                                        <img src="images/<%=products.image[0]%>" class="img-fluid" alt="img">
+                                        <div>
+                                            <h2><%= products.name %></h2> 
+                                            <span class="price">₹ <%= products.price %><span>
+                                        </div>
+                                    <div id="pagination-container"></div>
+                                        <button type="button" onclick="addcart('<%= products._id %>')" class="btn btn-link">
+                                            <i class="fa fa-heart"  style="color: rgb(236, 142, 158);"></i>
+                                        </button>
+                                        <button type="button" onclick="addtocart('<%= products._id %>')" value="submit" class="btn btn-Light">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button> <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>
+                                    </div>
+    
+                                </div>
+                            </a>
+                        <%})%>
 						</div>
-				        <div class="col-lg-9 col-xl-9">
+                        <div class="col-lg-9 col-xl-9">
 						<div class="row row-pb-md">
 							<div class="col-lg-4 mb-4 text-center">
 								<div class="product-entry border">
@@ -543,11 +526,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 
- function addwishlist(id) {
+ function addcart(id) {
 	      console.log(id);
 			$.ajax({
 				type: 'post',
-				url: '/addwishlist',
+				url: '/addcart',
 				data: {
 				 proId: id
 				},

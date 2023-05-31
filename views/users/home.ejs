@@ -250,8 +250,8 @@
 								<span class="price">₹ <%=products.price%></span>
 							</div>
 							<p></p>
-	<button type="button" onclick="addwishlist('<%= products._id %>')" class="btn btn-link">
-        <i class="fa fa-heart"  style="color: rgb(236, 63, 92);"></i>
+	<button type="button" onclick="addCart('<%= products._id %>')" class="btn btn-link">
+        <i class="fa fa-shopping-cart"></i>
       </button>
      <button type="button" class="btn btn-link btn-view" style="color:rgb(193, 30, 30);"><a href="product-detail?pid=<%= products._id %>" value="submit">view</button>  
         <!-- <div class="text-<%= products.status == 'In Stock' ? 'success' : 'danger' %>"><%= products.status %></div>  -->
@@ -552,11 +552,11 @@
 	<script src="js/main.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
-		function addwishlist(id) {
+		function addCart(id) {
 			// console.log(id);
 			$.ajax({
 				type: 'post',
-				url: '/addwishlist',
+				url: '/addcart',
 				data: {
 					proId: id
 				},

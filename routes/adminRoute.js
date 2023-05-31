@@ -11,7 +11,6 @@ const FILE_TYPE_MAP = {
     "image/jpg": "jpg",
 };
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const isValid = FILE_TYPE_MAP[file.mimetype];
@@ -28,9 +27,7 @@ const storage = multer.diskStorage({
     },
 });
 
-
 const uploadOptions = multer({ storage: storage });
-
 
 router.get("/", auth.isLogout, adminController.loadLogin);
 router.post("/", adminController.verifyLogin);
@@ -50,14 +47,14 @@ router.get("/banner", auth.isAdmin, adminController.banner);
 router.get("/addBanner", auth.isAdmin, adminController.addbanner);
 router.get("/sales-report", auth.isAdmin, adminController.loadSalesReport);
 router.get("/cancel-order", auth.isAdmin, adminController.cancelOrderApproval);
-router.get("/cancel-order-request", auth.isAdmin, adminController.cancelOrderProcess)
+router.get("/cancel-order-request", auth.isAdmin, adminController.cancelOrderProcess);
 router.post("/addBanner", auth.isAdmin, uploadOptions.single("product_images", 10), adminController.AddBanner);
 router.post("/disablebanner/:id", auth.isAdmin, adminController.disablebanner);
 router.post("/enablebanner/:id", auth.isAdmin, adminController.enablebanner);
 router.post("/deletebanner/:id/:val", auth.isAdmin, adminController.deletebanner);
 router.get("/deletebanner/:id", auth.isAdmin, adminController.deletebanner);
 router.get("/orders", auth.isAdmin, adminController.ordermanagement);
-router.get("/orderdetails/:id", auth.isAdmin,adminController.orderlist);
+router.get("/orderdetails/:id", auth.isAdmin, adminController.orderlist);
 router.get("/orderinvoice/:id", auth.isAdmin, adminController.invoice);
 router.get("/coupons", auth.isAdmin, adminController.coupon);
 router.get("/addcoupon", auth.isAdmin, adminController.addcoupon);
@@ -80,7 +77,11 @@ router.get("/delete-category", auth.isAdmin, adminController.deletecategories);
 router.get("/delete-product/:id", auth.isAdmin, adminController.deleteproduct);
 router.get("/block/:id", auth.isAdmin, adminController.block);
 router.get("/unblock/:id", auth.isAdmin, adminController.unblock);
-router.get("*", function (req, res) { res.redirect("/admin"); });
-router.get("/", function (req, res, next) { res.render("admin", { admin: true }); });
+router.get("*", function (req, res) {
+    res.redirect("/admin");
+});
+router.get("/", function (req, res, next) {
+    res.render("admin", { admin: true });
+});
 
 module.exports = router;

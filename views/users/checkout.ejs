@@ -587,7 +587,10 @@
                         <input type="number" id="phone" class="form-control" name="phone" required />
                     </div>
                     <div class="d-flex justify-content-center mt-3">
-                        <input type="hidden" value="/cart" name="whereto">
+                        <input id="whereto" type="hidden" value="" name="whereto">
+                        <script>
+                            document.querySelector("#whereto").value = window.location.href
+                        </script>
                         <button type="submit" class="btn btn-dark">Submit</button>
                     </div>
                 </form>
@@ -638,7 +641,10 @@
                         <input type="number" id="ephone" class="form-control" name="phone" required />
                     </div>
                     <div class="d-flex justify-content-center mt-3">
-                        <input type="hidden" value="/cart" name="whereto">
+                        <input id="whereto2" type="hidden" value="/cart" name="whereto">
+                        <script>
+                            document.querySelector("#whereto2").value = window.location.href
+                        </script>
                         <button type="submit" class="btn btn-dark">Submit</button>
                     </div>
                 </form>
@@ -668,10 +674,10 @@
 
                 </div>
                 <a class="text-info text-right" onclick="editAddress(event, '<%= JSON.stringify(val) %>')" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
-                <a class="text-danger text-right" href="/delete-address?name=<%= val.name%>&whereto=/cart">Delete</a>
-                <!-- <a class="text-success text-lg-end text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editaddress('<%=val._id %>')" href="#"
-                    ><small><i class="bi bi-pencil-square"></i> Edit</small>
-                </a> -->
+                <a id="del-where" class="text-danger text-right" href="/delete-address?name=<%= val.name%>&whereto=">Delete</a>
+                <script>
+                    document.querySelector("#del-where").href += window.location.href
+                </script>
             </div>
         </a>
         <% }) %> <% } %>

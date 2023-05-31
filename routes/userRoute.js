@@ -16,9 +16,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const userController = require("../controllers/userController");
 const ajax = require("../middleware/ajax");
+
+router.get("/", auth.isLogout, userController.loginLoad);
 router.get("/register", auth.isLogout, userController.loadRegister);
 router.post("/register", upload.single("image"), userController.insertUser);
-router.get("/", auth.isLogout, userController.loginLoad);
 router.get("/login", auth.isLogout, userController.loginLoad);
 router.post("/otp", userController.sendOtp);
 router.post("/verifyotp", userController.verifyotp);
@@ -36,8 +37,7 @@ router.get("/cart", auth.isLogin, auth.isBlocked, userController.cart);
 router.get("/order-complete", auth.isLogin, auth.isBlocked, userController.orderComplete);
 router.post("/orderid", auth.isLogin, auth.isBlocked, userController.orderid);
 router.post("/checkoutform", auth.isLogin, auth.isBlocked, userController.checkoutform);
-// router.post("/addwishlist",auth.isLogin,auth.isBlocked,userController.addwishlis);
-router.post("/addwishlist", auth.isLogin, auth.isBlocked, ajax.ajaxSession, userController.addwishlist);
+router.post("/addcart", auth.isLogin, auth.isBlocked, ajax.ajaxSession, userController.addcart);
 router.post("/addtocart", auth.isLogin, auth.isBlocked, userController.addtocart);
 router.post("/delete-cart/:id", auth.isLogin, auth.isBlocked, userController.cartDelete);
 router.post("/delete-wishlist/:id", auth.isLogin, auth.isBlocked, userController.wishlistDelete);
@@ -69,7 +69,7 @@ router.post("/forgot-password", userController.resetPassword);
 router.post("/couponvalidate", userController.couponValidate);
 router.post("/mywallet", userController.wallet);
 router.post("/addaddress", userController.addaddress);
-router.post("/editaddress", userController.editaddress)
+router.post("/editaddress", userController.editaddress);
 router.get("/delete-address", auth.isLogin, auth.isBlocked, userController.deleteAddress);
 router.get("/walletHistory", auth.isLogin, auth.isBlocked, userController.walletHistory);
 

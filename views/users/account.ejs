@@ -146,7 +146,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <p id="p"><b> <%= val.name%></b>, <%= val.post +', ' +val.pin+', '+ val.city +', ' +val.district+', '+val.state  +', '+  val.phone %></p>
+                                                        <p id="p">Name: <b><%- val.name%></b>,<br>Post: <b><%- val.post +'</b>,<br> Pin: <b>' +val.pin+'</b>,<br>City: <b>'+ val.city +'</b>,<br>District: <b>' +val.district+'</b>,<br>State: <b>'+val.state  +'</b>,<br>Phone: <b>'+  val.phone %></b></p>
                                                     </div>
                                                     <a class="text-danger text-right" href="/delete-address?name=<%= val.name%>&whereto=/account">Delete</a>
                                                     <!-- <a class="text-success text-lg-end text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editaddress('<%=val._id %>')" href="#"
