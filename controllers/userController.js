@@ -322,10 +322,10 @@ const sendOtp = async (req, res, next) => {
                     }
                 });
             } else {
-                res.render("users/registration", { status: "true" });
+                res.render("users/otp", { status: "true" });
             }
         } else {
-            res.render("users/registration", { status: "false" });
+            res.render("users/otp", { status: "false" });
         }
     } catch (error) {
         console.log(error);
@@ -1222,7 +1222,7 @@ const orderli = async (req, res, next) => {
 const walletHistory = async (req, res) => {
     const user = await userModel.findById(req.session.user_id);
     res.render("users/walletHistory", {
-        data: user.wallet_history,
+      data: user.wallet_history || [],
     });
 };
 

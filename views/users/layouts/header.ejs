@@ -36,7 +36,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 <script>
     function search_it(event, element, force=false) {
-        const url = `${window.location.protocol}//${window.location.host}/shop`
+        const url = null
         if(force || event.keyCode == 13) {
             addParam("search", element.value, event, url)
         }
@@ -68,7 +68,7 @@
 			            <div class="search-wrap">
 			               <div class="form-group">
 			                  <input type="text" id="search-box-text" class="form-control" name="search" placeholder="Search" onkeydown="search_it(event, this)">
-			                  <button class="btn btn-primary submit-search text-center" type="button" onclick="search_it(event, document.querySelector('input#search-box-text').value, true)"><i class="icon-search"></i></button>
+			                  <button class="btn btn-primary submit-search text-center" type="button" onclick="search_it(event, document.querySelector('input#search-box-text'), true)"><i class="icon-search"></i></button>
                               <script>
                                 document.querySelector("input#search-box-text").value = new URL(window.location.href)
                                     .searchParams.get("search")
@@ -87,7 +87,7 @@
 										<li><a href="wishlist">Wishlist</a></li>
 										
 										<li><a href="cart">Shopping Cart</a></li>
-                                         <li><a href="orderhistory">order hisory</a></li>
+                                         <li><a href="orderhistory">Order hisory</a></li>
 										<li><a href="order-complete">Order success</a></li>
 										<li><a href="account">myprofile</a></li>
 			                            <li class="active"><a href="/logout">Logout</button></li>							
