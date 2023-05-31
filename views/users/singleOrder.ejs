@@ -59,11 +59,18 @@
                 "
               >
                 <h6 style="margin-bottom: 10px">Ordered Items</h6>
+<% order.products.forEach((product) => { %>
+  <img src="images/<%= product.product_id.image[0] %>" alt="img" style="height:95px">
+<% }) %>
+
+
+
+<!-- <h6 style="margin-bottom: 10px">Ordered Items</h6>
                 <p>
                <%= order.products[0].product_id.image[0] %>
                   
               </p> 
-            
+             -->
             </div>
 
               <p class="mb-0" style="color: #35558a">Payment summary</p>

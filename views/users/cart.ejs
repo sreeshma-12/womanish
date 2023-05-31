@@ -88,9 +88,32 @@
 								<span>Remove</span>
 							</div>
 						</div>
-						<% let subtotal = 0 %> 
-				<% userData.cart.forEach((data)=>{ %>
-					
+						<!-- <% let subtotal = 0 %>  -->
+				<!-- <% userData.cart.forEach((data)=>{ %> -->
+					<% let subtotal = 0 %> 
+<% userData.cart.forEach((data) => { %>
+	<div id="<%= data._id %>item" class="product-cart d-flex align-items-center">
+		<div class="one-forth">
+			<% if (data.product_id && data.product_id.image && data.product_id.image[0]) { %>
+				<img src="images/<%= data.product_id.image[0] %>" alt="img" style="height:95px">
+			<% } else { %>
+				<!-- Handle the case when the image is not available -->
+			<% } %>
+			<div class="display-tc">
+				<h3><%= data.product_id ? data.product_id.name : 'Product Name Not Available' %></h3>
+			</div>
+		</div>
+	</div>
+<% }) %>
+
+
+
+
+
+
+
+
+					<!-- ---------------------- -->
 					<div id="<%= data._id %>item" class="product-cart d-flex align-items-center">
 						<div class="one-forth">
 			   <img src="images/<%= data.product_id.image[0] %>" alt="img" style="height:95px">
