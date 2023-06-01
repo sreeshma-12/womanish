@@ -291,7 +291,7 @@ otp = parseInt(otp);
 
 //-------------- OTP Page ----------------------
 const otpget = (req, res) => {
-    res.render("users/otp");
+    res.render("users/otp", { message: "", error: "" });
 };
 //-------------- Send OTP -------------------------
 const sendOtp = async (req, res, next) => {
@@ -323,7 +323,11 @@ const sendOtp = async (req, res, next) => {
                 html: `<h3>OTP for account verification is </h3><h1 style='font-weight:bold;'>${otp}</h1>`,
             },
             (error, info) => {
-                res.render("users/otp", { message: error ? "Mail send error" : "Mail sent, check your email" });
+                if(error) {
+                    res.render("users/otp", { error: "Mail send error", message: "" });
+                } else {
+                    res.render("users/otp", { error: "", message : "Mail sent, check your email" });
+                }
             }
         );
     } catch (error) {
@@ -352,7 +356,7 @@ const verifyotp = async (req, res, next) => {
                 res.redirect("/");
             });
         } else {
-            res.render("users/otp", { status: "true" });
+            res.render("users/otp", { error: "Invalid OTP", message: "" });
         }
     } catch (err) {
         console.log(err);
@@ -372,7 +376,7 @@ const resendOTP = (req, res, next) => {
             if (error) {
                 res.render("users/error/error");
             }
-            res.render("users/otp");
+            res.render("users/otp", { message: "OTP sent", error: "" });
         });
     } catch (err) {
         next(err);

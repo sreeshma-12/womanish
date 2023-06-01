@@ -239,12 +239,10 @@
              <div class="row row-pb-md">
 				<% products.forEach(function(products,i) { %>
 					<div class="col-lg-3 mb-4 text-center">
-
+                        <a href="product-detail?pid=<%= products._id %>">
 						<div class="product-entry border">
-							<a href="#" class="prod-img">
 								<img src="images/<%=products.image[0]%>" class="img-fluid"
 									alt="Free html5 bootstrap 4 template">
-							</a>
 							<div class="desc" style="color: blue;">
 								<h7><a style="color: rgba(194, 33, 203, 0.58);" class="text-decoration-none fw-light offset fs-6"href="#"><%=products.name%></a></h7>
 								<span class="price">₹ <%=products.price%></span>
@@ -258,6 +256,7 @@
  <!-- <button type="button" class="btn btn-link" style="color: white; background-color: blue; border-color: blue;"><a href="product-detail" value="submit" style="text-decoration:none; color: inherit;">view</a></button> -->
     
                         </div>
+                    </a>
 					</div>
 					<%})%>
 			</div> 
