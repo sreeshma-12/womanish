@@ -27,7 +27,7 @@ router.get("/resend", userController.resendOTP);
 router.get("/about", userController.about);
 // router.get("/contact", userController.contact);
 router.get("/wishlist", auth.isLogin, auth.isBlocked, userController.wishlist);
-router.get("/shop", auth.isLogin, auth.isBlocked, userController.shop);
+router.get("/shop",userController.shop);
 // router.get("/shop", auth.isLogin, auth.isBlocked, userController.shopp);
 router.get("/return-order", auth.isLogin, auth.isBlocked, userController.returnOrder);
 router.get("/cancel-order", auth.isLogin, auth.isBlocked, userController.cancelOrder);
