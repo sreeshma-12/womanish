@@ -882,6 +882,8 @@ const productdetails = async (req, res, next) => {
         next(error);
     }
 };
+
+
 // ---------- cart ----------------
 
 const cart = async (req, res, next) => {
@@ -1251,7 +1253,7 @@ module.exports = {
     checkout,
     cart,
     about,
-    // contact,
+    //contact,
     orderComplete,
     addtocart,
     quantitydec,
